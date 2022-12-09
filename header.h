@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 14:40:42 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/09 16:12:29 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ typedef struct s_scene
 	t_list		*objects;
 }	t_scene;
 
-int			parse_rt_file(t_scene *scene, char *file_name);
+void		print_scene(t_scene *i);
+void		parse_rt_file(t_scene *scene, char *file_name);
 void		error(char *message);
 //ptere pas non
 t_vector	ft_normal(t_vector a, t_vector b, t_vector c);

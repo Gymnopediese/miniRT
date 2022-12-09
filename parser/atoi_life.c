@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:47:37 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 15:19:23 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/09 16:27:14 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,45 @@ int	ft_atoir(const char *str, int min, int max)
 		num = num * 10 + (str[i++] - 48);
 	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
-	if (str[i] || (max != min && (i < min || i > max)))
-		error("atoi error, please check your .rt file");
+	if (max != min && (i < min || i > max))
+		error("atoi range error, please check your .rt file");
+	if (str[i])
+		error("atoi char error, please check your .rt file");
 	return (num * neg);
+}
+
+double	ft_atodor(const char *str, double min, double max)
+{
+	double		neg;
+	int			i;
+	double		num;
+	int			count;
+
+	i = 0;
+	neg = 1;
+	num = 0;
+	count = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			neg *= -1;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+		num = num * 10 + (str[i++] - 48);
+	if (str[i++] != '.')
+		return (num * neg);
+	while (str[i] >= 48 && str[i] <= 57 && ++count)
+		num = num * 10 + (str[i++] - 48);
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		;
+	num = num / ft_pow(10, count) * neg;
+	if (max != min && (num < min || num > max))
+		error("atodo range error, please check your .rt file");
+	if (str[i])
+		error("atodo char error, please check your .rt file");
+	return (num);
 }
 
 t_vector	ft_atovedo(char *str, double min, double max)
@@ -43,15 +79,15 @@ t_vector	ft_atovedo(char *str, double min, double max)
 	t_vector	res;
 	char		**args;
 
-	args = ft_split(str, ",");
+	args = ft_split(str, ',');
 	if (args == 0)
 		error("spliting vector double malloc error");
 	if (ft_strtablen(args) != 3)
 		error("vector invalid arguments");
-	res.x = ft_atodo(args[0]);
-	res.y = ft_atodo(args[1]);
-	res.z = ft_atodo(args[2]);
-	ft_free_pp(args);
+	res.x = ft_atodor(args[0], min, max);
+	res.y = ft_atodor(args[1], min, max);
+	res.z = ft_atodor(args[2], min, max);
+	ft_free_pp((void **)args);
 	return (res);
 }
 
@@ -60,17 +96,14 @@ t_vector	ft_atovei(char *str, int min, int max)
 	t_vector	res;
 	char		**args;
 
-	args = ft_split(str, ",");
+	args = ft_split(str, ',');
 	if (args == 0)
 		error("spliting vector int malloc error");
 	if (ft_strtablen(args) != 3)
 		error("vector invalid arguments");
-	res.x = ft_atoi(args[0]);
-	res.y = ft_atoi(args[1]);
-	res.z = ft_atoi(args[2]);
-	if (min != max && (res.x < min || res.x > max || res.y < min
-			|| res.y > max || res.z < min || res.z > max))
-		error("invalid range for vector");
-	ft_free_pp(args);
+	res.x = ft_atoir(args[0], min, max);
+	res.y = ft_atoir(args[1], min, max);
+	res.z = ft_atoir(args[2], min, max);
+	ft_free_pp((void **)args);
 	return (res);
 }

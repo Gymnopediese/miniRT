@@ -6,9 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:45:50 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 14:46:11 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/09 16:30:29 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "parser.h"
 
 int	ft_strcmp_word(char *line, char *cmp)
 {

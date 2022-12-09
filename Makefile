@@ -6,14 +6,13 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-#    Updated: 2022/12/09 13:08:44 by albaud           ###   ########.fr        #
+#    Updated: 2022/12/09 16:17:57 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= fdf
-MAIN 		= main.c
+NAME		= miniRT
+MAIN 		= debug.c errors.c main.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c
 OBJS		= ${MAIN:.c=.o}
-
 LIB 		= koflibc/libft.a
 CC			= /usr/bin/gcc
 CFLAGS		= -Wall -Wextra -Werror
@@ -31,6 +30,9 @@ $(NAME)	: ${LIB} ${OBJS}
 $(LIB)	: 
 		make -C koflibc
 
+c		:
+		find *.c */*.c | tr '\n' ' '
+
 clean	:
 		rm -f ${OBJS}
 fclean	:	clean
@@ -43,3 +45,6 @@ relib	: lclean all
 
 leak	: fclean ${LIB}
 		${CC} ${CFLAGS} ${SANITIZE} ${MINILIBX} -o ${NAME} ${MAIN} ${LIB}
+
+run		: all
+		./miniRT test.rt
