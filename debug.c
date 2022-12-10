@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:52:40 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 19:35:45 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/10 22:04:03 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //this file will be removed before the correction
 
-void	print_vector(t_vector a, char *name)
+void	print_vector(t_v3 a, char *name)
 {
 	printf("%s(%f, %f, %f)\n", name, a.x, a.y, a.z);
 }

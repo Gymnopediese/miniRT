@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:47:37 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 16:27:14 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/10 21:45:43 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ double	ft_atodor(const char *str, double min, double max)
 	return (num);
 }
 
-t_vector	ft_atovedo(char *str, double min, double max)
+t_v3	ft_atovedo(char *str, double min, double max)
 {
-	t_vector	res;
-	char		**args;
+	t_v3	res;
+	char	**args;
 
 	args = ft_split(str, ',');
 	if (args == 0)
@@ -91,10 +91,10 @@ t_vector	ft_atovedo(char *str, double min, double max)
 	return (res);
 }
 
-t_vector	ft_atovei(char *str, int min, int max)
+t_v3	ft_atovei(char *str, int min, int max)
 {
-	t_vector	res;
-	char		**args;
+	t_v3	res;
+	char	**args;
 
 	args = ft_split(str, ',');
 	if (args == 0)

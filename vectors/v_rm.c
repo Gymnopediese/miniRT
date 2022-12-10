@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gradient.c                                         :+:      :+:    :+:   */
+/*   v_rm.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 19:18:11 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 22:49:54 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/10 20:25:20 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/10 20:58:14 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "background.h"
+#include "t_v3.h"
 
-int	gradient_background(t_canvas *cvs, t_v3 *s, t_v3 *e)
+t_v3	v_rm(const t_v3 *a, const t_v3 *b)
 {
-	int		x;
-	int		y;
-	t_v3	to_add;
+	return ((t_v3){a->x - b->x, a->y - b->y, a->z - b->z});
+}
 
-	to_add = (t_v3){(e->x - s->x) / cvs->y,
-		(e->y - s->y) / cvs->y, (e->z - s->z) / cvs->y};
-	y = -1;
-	while (++y < cvs->y)
-	{
-		x = -1;
-		while (++x < cvs->x)
-		{
-			ft_put_pixel(cvs, x, y, ft_rgb(s->x, s->y, s->z));
-		}
-		v_cadd(s, &to_add);
-	}
-	return (0);
+t_v3	v_nrm(const t_v3 *a, const double b)
+{
+	return ((t_v3){a->x - b, a->y - b, a->z - b});
+}
+
+void	v_crm(t_v3 *a, const t_v3 *b)
+{
+	a->x -= b->x;
+	a->y -= b->y;
+	a->z -= b->z;
+}
+
+void	v_cnrm(t_v3 *a, const double b)
+{
+	a->x -= b;
+	a->y -= b;
+	a->z -= b;
 }
