@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 16:12:29 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/10 19:35:27 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HEADER_H
 
 # include "koflibc/sources.h"
+# include "background/background.h"
 
 enum e_id
 {
@@ -27,6 +28,12 @@ enum e_id
 	HYPERBOILD,
 	PARABOLOID,
 };
+
+typedef struct s_ray
+{
+	t_vector	*origin;
+	t_vector	direction;
+}	t_ray;
 
 
 typedef struct s_light
@@ -81,14 +88,7 @@ double		dotprod(t_vector a, t_vector b);
 void		rgb(int *pointer);
 void		handle_input(int key, t_camera *cam);
 
-void		gradient0(int *pointer);
-void		gradient1(int *pointer);
-void		gradient2(int *pointer);
-void		gradient3(int *pointer);
-void		gradient4(int *pointer);
-void		gradient5(int *pointer);
-void		gradient6(int *pointer);
-void		gradient7(int *pointer);
-void		gradient8(int *pointer);
-void		gradient9(int *pointer);
+
+//to remove
+void		print_vector(t_vector a, char *name);
 #endif

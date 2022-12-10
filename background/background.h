@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   background.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 14:28:46 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 19:35:31 by albaud           ###   ########.fr       */
+/*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/10 19:49:26 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#ifndef BACKGROUND_H
+# define BACKGROUND_H
 
-void	error(char *message)
-{
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(message, 2);
-	ft_garbage_colector(0, 1, 1);
-}
+/*
+	objectif mettre des foules image en backround
+*/
+
+# include "../header.h"
+
+int	gradient_background(t_canvas *cvs, t_vector *s, t_vector *e);
+
+#endif

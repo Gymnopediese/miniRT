@@ -6,12 +6,12 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-#    Updated: 2022/12/09 16:17:57 by albaud           ###   ########.fr        #
+#    Updated: 2022/12/10 19:31:42 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniRT
-MAIN 		= debug.c errors.c main.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c
+MAIN 		= debug.c errors.c main.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c background/gradient.c
 OBJS		= ${MAIN:.c=.o}
 LIB 		= koflibc/libft.a
 CC			= /usr/bin/gcc

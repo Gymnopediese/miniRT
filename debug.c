@@ -6,11 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:52:40 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 16:48:12 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/10 19:35:45 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+//this file will be removed before the correction
 
 void	print_vector(t_vector a, char *name)
 {
@@ -53,7 +55,7 @@ void	print_object(t_obj *a)
 void	print_scene(t_scene *i)
 {
 	t_list	*l;
-	
+
 	l = i->objects;
 	print_ambiance(i->ambiance);
 	print_camera(i->camera);
@@ -63,5 +65,4 @@ void	print_scene(t_scene *i)
 		print_object((t_obj *)l->data);
 		l = l->next;
 	}
-
 }

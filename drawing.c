@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 14:28:46 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 19:35:31 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/10 19:16:57 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	error(char *message)
+void	ray_trace()
 {
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(message, 2);
-	ft_garbage_colector(0, 1, 1);
+	
 }
