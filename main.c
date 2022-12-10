@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 22:49:50 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/10 23:12:39 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,13 @@
 
 int	hit_circle(const t_ray *ray, const t_obj *c)
 {
-	return (c->diametre >= v_norm(&c->pos)
-		* tanf(v_angle(&ray->direction, &c->pos)));
+	t_v3	opos;
+	t_v3	cpos;
+
+	opos = v_rm(&c->pos, &ray->origin);
+	cpos = ray->direction;
+	return (c->diametre >= v_norm(&opos)
+		* tanf(v_angle(&cpos, &opos)));
 }
 
 t_v3	v_relative_pos(double height, double width, double x, double y)
@@ -38,7 +43,7 @@ void	ray_trace(t_scene *scene)
 	t_list	*t;
 
 	y = -1;
-	r.origin = (t_v3){0, 0, 0};
+	r.origin = scene->camera->pos;
 	while (++y < scene->w.cvs.y)
 	{
 		x = -1;
@@ -62,13 +67,13 @@ int	hook(int key, t_scene *scene)
 {
 	ft_putnbrn(key);
 	if (key == KEYCODE_A)
-		((t_obj *)scene->objects->data)->pos.x -= ADD;
+		scene->camera->pos.x -= ADD;
 	if (key == KEYCODE_S)
-		((t_obj *)scene->objects->data)->pos.y += ADD;
+		scene->camera->pos.y += ADD;
 	if (key == KEYCODE_D)
-		((t_obj *)scene->objects->data)->pos.x += ADD;
+		scene->camera->pos.x += ADD;
 	if (key == KEYCODE_W)
-		((t_obj *)scene->objects->data)->pos.y -= ADD;
+		scene->camera->pos.y -= ADD;
 	gradient_background(&scene->w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
 	ray_trace(scene);
