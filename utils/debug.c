@@ -6,11 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 15:52:40 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:43:18 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 21:43:49 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 //this file will be removed before the correction
 
