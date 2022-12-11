@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_tocol.c                                          :+:      :+:    :+:   */
+/*   v_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 22:28:21 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:24:25 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/11 19:56:43 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/11 20:29:10 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_v3.h"
+#include "../header.h"
 
-int	v_tocol(const t_v3 *a)
+t_v3	v_relative_pos(double height, double width, double x, double y)
 {
-	int	rgb;
-
-	rgb = a->x;
-	rgb = (rgb << 8) + a->y;
-	rgb = (rgb << 8) + a->z;
-	return (rgb);
+	return ((t_v3){
+		(x - width / 2) * 2 / width,
+		(y - height / 2) * 2 / height,
+		1,
+	});
 }

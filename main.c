@@ -6,77 +6,45 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 10:48:49 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 21:43:06 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include "parser/parser.h"
-#define ADD 5
-//θ = cos-1 [ (a · b) / (|a| |b|) ]
 
-int	hit_circle(const t_ray *ray, const t_obj *c)
+int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
 {
-	t_v3	opos;
-	t_v3	cpos;
+	t_v3	rgb;
+	double	i;
 
-	opos = v_rm(&c->pos, &ray->origin);
-	cpos = ray->direction;
-	return (c->diametre >= v_norm(&opos)
-		* tanf(v_angle(&cpos, &opos)));
+	i = 1 - (v_dist(hit, &scene->light->pos)
+			/ v_dist(&obj->pos, &scene->light->pos));
+	(void) rgb;
+	if (i < 0)
+		return (0);
+	rgb = v_average(&obj->color, &scene->light->color);
+	v_cnmult(&rgb, fabs(i) * scene->light->ratio);
+	return (v_tocol(&rgb));
 }
 
-t_v3	v_relative_pos(double height, double width, double x, double y)
+int	ray_trace(t_scene *scene, t_obj *obj, t_ray *r)
 {
-	return ((t_v3){
-		(x - width / 2) * 2 / width,
-		(y - height / 2) * 2 / height,
-		1,
-	});
-}
+	t_v3	hit;
 
-void	ray_trace(t_scene *scene)
-{
-	int		x;
-	int		y;
-	t_ray	r;
-	t_list	*t;
-
-	y = -1;
-	r.origin = scene->camera->pos;
-	while (++y < scene->w.cvs.y)
-	{
-		x = -1;
-		while (++x < scene->w.cvs.x)
-		{
-			r.direction = v_relative_pos(scene->w.cvs.x, scene->w.cvs.y, x, y);
-			t = scene->objects;
-			while (t)
-			{
-				if (hit_circle(&r, t->data))
-				{
-					ft_put_pixel(&scene->w.cvs, x, y, v_tocol(&((t_obj *)t->data)->color));
-				}
-				t = t->next;
-			}
-		}
-	}
+	hit = sphere_intersect(r, obj);
+	if (!v_equal(&hit, v_null()))
+		return (coloring(obj, &hit, scene));
+	return (-1);
 }
 
 int	hook(int key, t_scene *scene)
 {
 	ft_putnbrn(key);
-	if (key == KEYCODE_A)
-		scene->camera->pos.x -= ADD;
-	if (key == KEYCODE_S)
-		scene->camera->pos.y += ADD;
-	if (key == KEYCODE_D)
-		scene->camera->pos.x += ADD;
-	if (key == KEYCODE_W)
-		scene->camera->pos.y -= ADD;
+	input(key, scene);
 	gradient_background(&scene->w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-	ray_trace(scene);
+	iterate_objects(scene);
 	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
 	return (0);
 }
@@ -93,9 +61,10 @@ int	main(int argc, char **argv)
 	parse_rt_file(&scene, argv[1]);
 	ft_mlx_init(&scene.w, 800, 800, "miniRT");
 	scene.w.cvs = ft_init_canvas(scene.w.mlx, 800, 800);
+	scene.input_mode = -1;
 	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-	ray_trace(&scene);
+	iterate_objects(&scene);
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
 	print_scene(&scene);
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);

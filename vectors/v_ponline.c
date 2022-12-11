@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_tocol.c                                          :+:      :+:    :+:   */
+/*   v_ponline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 22:28:21 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:24:25 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/11 14:08:38 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/11 17:30:32 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_v3.h"
 
-int	v_tocol(const t_v3 *a)
+t_v3	v_ponline(const t_v3 *a, const t_v3 *b, const double x)
 {
-	int	rgb;
+	t_v3	m;
 
-	rgb = a->x;
-	rgb = (rgb << 8) + a->y;
-	rgb = (rgb << 8) + a->z;
-	return (rgb);
+	m = v_nmult(b, x);
+	return (v_add(a, &m));
 }

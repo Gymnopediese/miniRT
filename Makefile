@@ -6,12 +6,12 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-#    Updated: 2022/12/10 21:55:36 by albaud           ###   ########.fr        #
+#    Updated: 2022/12/11 20:30:23 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniRT
-MAIN 		= debug.c errors.c main.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c background/gradient.c
+MAIN 		= main.c background/gradient.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c utils/v_utils.c
 OBJS		= ${MAIN:.c=.o}
 LIB 		= koflibc/libft.a vectors/vlib.a
 CC			= /usr/bin/gcc
@@ -32,7 +32,7 @@ $(LIB)	:
 		make -C vectors
 
 c		:
-		find *.c */*.c | tr '\n' ' '
+		find *.c */*.c | grep -v *vectors*| tr '\n' ' ' 
 
 clean	:
 		rm -f ${OBJS}
@@ -48,4 +48,4 @@ leak	: fclean ${LIB}
 		${CC} ${CFLAGS} ${SANITIZE} ${MINILIBX} -o ${NAME} ${MAIN} ${LIB}
 
 run		: all
-		./miniRT test.rt
+		./miniRT rt_files/test.rt

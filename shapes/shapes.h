@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_tocol.c                                          :+:      :+:    :+:   */
+/*   shapes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 22:28:21 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:24:25 by albaud           ###   ########.fr       */
+/*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/11 21:42:05 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_v3.h"
+#ifndef SHAPES_H
+# define SHAPES_H
 
-int	v_tocol(const t_v3 *a)
-{
-	int	rgb;
+# include "../structs.h"
 
-	rgb = a->x;
-	rgb = (rgb << 8) + a->y;
-	rgb = (rgb << 8) + a->z;
-	return (rgb);
-}
+void	iterate_objects(t_scene *scene);
+//spheres
+t_v3	sphere_intersect(t_ray *ray, t_obj *sphere);
+
+#endif

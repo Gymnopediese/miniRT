@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 21:44:48 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 21:42:53 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ligne_to_shape(char **argv, t_scene *scene, enum e_id id)
 		init_cone(argv, obj);
 	else if (id == HYPERBOILD)
 		init_hyperboloid(argv, obj);
-	ft_lstadd_back(&scene->objects, ft_lstnew(obj)); //todo pimplist
+	ft_lstadd_back(&scene->objects, ft_lstnew(obj));
 }
 
 void	ligne_to_obj(char *line, t_scene *scene)

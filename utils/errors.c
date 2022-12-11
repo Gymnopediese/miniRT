@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_tocol.c                                          :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/10 22:28:21 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:24:25 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/09 14:28:46 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/10 19:35:31 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "t_v3.h"
+#include "header.h"
 
-int	v_tocol(const t_v3 *a)
+void	error(char *message)
 {
-	int	rgb;
-
-	rgb = a->x;
-	rgb = (rgb << 8) + a->y;
-	rgb = (rgb << 8) + a->z;
-	return (rgb);
+	ft_putendl_fd("Error", 2);
+	ft_putendl_fd(message, 2);
+	ft_garbage_colector(0, 1, 1);
 }

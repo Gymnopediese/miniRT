@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sources.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:33:27 by tate              #+#    #+#             */
-/*   Updated: 2022/10/31 11:48:31 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 16:57:14 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "minilixx/theminilibx/minilibx_macos/mlx.h"
 # include <sys/errno.h>
 # include <dirent.h>
-# include <term.h>
 # include <curses.h> 
 # include <time.h>
 # include "macro.h"
