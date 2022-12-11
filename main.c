@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 23:12:39 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 10:40:28 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define ADD 5
 //θ = cos-1 [ (a · b) / (|a| |b|) ]
 
-int	hit_circle(const t_ray *ray, const t_obj *c)
+__global__	int	hit_circle(const t_ray *ray, const t_obj *c)
 {
 	t_v3	opos;
 	t_v3	cpos;
@@ -55,7 +55,8 @@ void	ray_trace(t_scene *scene)
 			{
 				if (hit_circle(&r, t->data))
 				{
-					ft_put_pixel(&scene->w.cvs, x, y, v_tocol(&((t_obj *)t->data)->color));
+					ft_put_pixel < < < 1, 2 > > > (&scene->w.cvs,
+						x, y, v_tocol(&((t_obj *)t->data)->color));
 				}
 				t = t->next;
 			}
