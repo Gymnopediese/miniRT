@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:43:06 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/11 21:48:14 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
 	(void) rgb;
 	if (i < 0)
 		return (0);
-	rgb = v_average(&obj->color, &scene->light->color);
-	v_cnmult(&rgb, fabs(i) * scene->light->ratio);
+	rgb = v_nmult(&scene->light->color, i);
+	rgb = v_average(&obj->color, &rgb);
 	return (v_tocol(&rgb));
 }
 
