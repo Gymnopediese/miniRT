@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 00:39:50 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 00:53:22 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
 	return (v_tocol(&rgb));
 }
 
-//wtf il faut que tu fasse ca c nimport quoi la
+//il faut que tu fasse ca c nimport quoi la😭😭😭
 int	get_pix(t_canvas *cvs, double y, double x)
 {
 	int	rgb;
@@ -77,7 +77,7 @@ int	ray_trace(t_scene *scene, t_obj *obj, t_ray *r)
 
 	hit = sphere_intersect(r, obj);
 	if (!v_equal(&hit, v_null()))
-		return (uvmapping(obj, &hit, scene));
+		return (coloring(obj, &hit, scene));
 	return (-1);
 }
 

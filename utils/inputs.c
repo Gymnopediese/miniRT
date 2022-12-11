@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:58:30 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 00:38:45 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 00:40:53 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	input(int key, t_scene *scene)
 {
 	if (key == KEYCODE_LEFT_ARROW)
 		scene->move_text.x += ADD / 3;
-	if (key == KEYCODE_DOWN_ARROW)
+	if (key == KEYCODE_RIGHT_ARROW)
 		scene->move_text.y += ADD / 3;
 	if (scene->input_mode == -1)
 		input_camera(key, scene);
