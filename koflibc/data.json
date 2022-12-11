@@ -1,0 +1,43 @@
+{
+	"" :
+	{
+		"Name":"",
+		"Categorie" : "",
+		"Synopsis" : "",
+		"Depend on" : "",
+		"Description" : "",
+		"Return value" : "",
+		"Errors": "",
+		"See also": "",
+		"History": ""
+	},
+	"ft_is_sort.c" :
+	{
+		"Name":"ft_is_sort - check if an int table is sorted depending on a mode",
+		"Synopsis" : "int ft_is_sort(int *tab, int length, int mode)",
+		"Modes" : "if (mode == -1): check if tab is reverse sorted, \n if (mode == 0) : check if tab is sorted in any way, \n if (mode == 1) : check if tab is sorted.",
+		"History": "On my way to push swap some mamas."
+	},
+	"ft_all_in_st.c" :
+	{
+		"Name":"ft_all_in_st - check if all element of a string table are int another string table.",
+		"Categories" : "string tables, boolean.",
+		"Synopsis" : "int ft_all_in_st(char **src, char **targets).",
+		"Dependencies" : "ft_contain_st().",
+		"Description" : "ft_contain_st() check if all the elements of src are in targets and return 1 it it is the case and zero otherwise. The behaviour is undefined if the string tables are not closed by a null pointer.",
+		"See also": "ft_contain_st().",
+		"History": "I made it to check if the inputed push_swap's parameters were ALL valid, what a time to be alive..."
+	},
+   	"ft_read_lignes_fd.c" : 
+   	{
+		"Name":"ft_read_lignes_fd - read text from an open fd line by line",
+		"Categorie" : "file reading",
+		"Synopsis" : "#include <unistd.h>, \n #include <stdlib.h>, \n \n char\t**ft_read_lignes_fd(int fd)",
+		"Depend on" : "read(), \n malloc()",
+		"Description" : "ft_read_lignes_fd() attempt to read an open file line by line using its fd and return a table of string.",
+		"Return value" : "Return a table of string. If an error occurs, it return NULL.",
+		"Errors": "Don't run this code on a Gameboy please.",
+		"See also": "ft_read_lignes(), ft_read(), ft_read_fd()",
+		"History": "I needed it for the get_next_line() function. My final get_next_line() function is the worst piece of code ever made but it has all the bonuses so..."
+   	}
+}
