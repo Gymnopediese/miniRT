@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 22:21:17 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 00:37:49 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_scene
 	t_list		*objects;
 	int			input_mode;
 	t_canvas	texture;
+	t_v3		move_text;
 }	t_scene;
 
 #endif

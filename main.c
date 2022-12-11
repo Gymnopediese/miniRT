@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 00:18:15 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 00:39:50 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
 	return (v_tocol(&rgb));
 }
 
+//wtf il faut que tu fasse ca c nimport quoi la
 int	get_pix(t_canvas *cvs, double y, double x)
 {
 	int	rgb;
@@ -52,8 +53,6 @@ int	get_pix(t_canvas *cvs, double y, double x)
 	return (rgb);
 }
 
-
-
 int	uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene)
 {
 	t_v3	uv;
@@ -61,8 +60,10 @@ int	uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene)
 	int		i;
 
 	pos = v_rm(hit, &obj->pos);
-	uv.x = 0.5 + (atan2f(pos.z, pos.x) / (2 * PI));
-	uv.y = 0.5 + (asinf(pos.y) / (PI));
+	uv.x = 0.5 + (atan2f(pos.z, pos.x) / (2 * PI)) + scene->move_text.x;
+	uv.y = 0.5 + (asinf(pos.y) / (PI)) + scene->move_text.y;
+	uv.y -= (int)uv.y;
+	uv.x -= (int)uv.x;
 	//print_vector(uv, "uv:	");
 	i = 1 - (v_dist(hit, &scene->light->pos)
 			/ v_dist(&obj->pos, &scene->light->pos));
