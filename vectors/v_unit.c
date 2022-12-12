@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_unit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:04:37 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 09:50:00 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:22:10 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ double	to_unit(const double i)
 
 t_v3	v_unit(const t_v3 *a)
 {
-	double	max;
+	double	norm;
 
-	max = v_maxabs(a);
+	norm = v_norm(a);
 	return ((t_v3){
-		a->x / max,
-		a->y / max,
-		a->z / max,
+		a->x / norm,
+		a->y / norm,
+		a->z / norm,
 	});
 }
 

@@ -1,0 +1,6 @@
+dammier.o debug.o disperse.o errors.o main.o uvmapping.o
+background/gradient.o minilibx_macos/mlx_init_loop.o minilibx_macos/mlx_int_str_to_wordtab.o minilibx_macos/mlx_new_image.o minilibx_macos/mlx_new_window.o minilibx_macos/mlx_shaders.o minilibx_macos/mlx_xpm.o parser/atoi_life.o parser/init_objs.o parser/init_shapes.o parser/parser.o parser/parser_utils.o shapes/sphere.o utils/debug.o utils/errors.o utils/inputs.o utils/iterate_objects.o utils/v_utils.o vectors/v_add.o vectors/v_angle.o vectors/v_average.o vectors/v_dist.o vectors/v_div.o vectors/v_dotp.o vectors/v_equal.o vectors/v_minmax.o vectors/v_mult.o vectors/v_norme.o vectors/v_null.o vectors/v_ponline.o vectors/v_rm.o vectors/v_tocol.o vectors/v_unit.o vectors/v_v3mult.o
+koflibc
+minilibx_macos
+Makefile
+vectors/Makefile
