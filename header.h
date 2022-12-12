@@ -6,7 +6,11 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/12/12 12:19:47 by albaud           ###   ########.fr       */
+=======
 /*   Updated: 2022/12/12 13:48:10 by bphilago         ###   ########.fr       */
+>>>>>>> acd9356d16ff4b7667baf1770e07518279c59d86
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +28,7 @@ void		error(char *message);
 void		input(int key, t_scene *scene);
 void		iterate_objects(t_scene *scene);
 t_v3		v_relative_pos(double height, double width, double x, double y);
-int			ray_trace(t_scene *scene, t_obj *obj, t_ray *r);
+int			ray_trace(t_scene *scene, t_ray *r, int depth);
 void		print_vector(t_v3 a, char *name);
 int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
 int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);

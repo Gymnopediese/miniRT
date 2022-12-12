@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 15:23:11 by bphilago         ###   ########.fr       */
+/*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/12 15:43:38 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,8 @@ int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
 	rgb = v_nmult(&scene->light->color, i);
 	rgb = v_average(&obj->color, &rgb);
 	//rgb = v_average(&colo, &rgb);
-	rgb = v_average(&scene->ambiance->color, &rgb);
+	//rgb = v_average(&scene->ambiance->color, &rgb);
 	return (v_tocol(&rgb));
-}
-
-int	ray_trace(t_scene *scene, t_obj *obj, t_ray *r)
-{
-	t_v3	hit;
-
-	hit = sphere_intersect(r, obj);
-	if (!v_equal(&hit, v_null()))
-		return (coloring2(obj, &hit, scene));
-	return (-1);
 }
 
 int	hook(int key, t_scene *scene)
@@ -102,6 +92,15 @@ int	main(int argc, char **argv)
 	scene.input_mode = -1;
 	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
+
+	t_obj sphere;
+	sphere.pos = (t_v3){3, 3, 2};
+	sphere.diametre = 2;
+	print_vector(sphere_reflection(&(t_ray)
+		{
+			(t_v3){0, 0, 0},
+			(t_v3){2, 2, 2},
+		}, &sphere, &(t_v3){2, 2, 2}), "testttt");
 	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
 	iterate_objects(&scene);
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
