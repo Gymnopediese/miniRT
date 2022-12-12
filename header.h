@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 11:02:06 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:48:10 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,6 @@ int			ray_trace(t_scene *scene, t_obj *obj, t_ray *r);
 void		print_vector(t_v3 a, char *name);
 int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
 int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);
+// Dispersion
+t_v3		disperse(t_hit *hit, t_obj *obj);
 #endif

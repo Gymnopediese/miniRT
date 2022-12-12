@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 11:05:09 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 12:38:44 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,8 @@ typedef struct s_scene
 
 typedef struct s_hit
 {
-	t_ray	*ray;
-	t_v3	*normal;
+	t_ray	ray;
+	t_v3	normal;
 }	t_hit;
-
 
 #endif

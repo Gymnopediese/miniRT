@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sources.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 14:33:27 by tate              #+#    #+#             */
-/*   Updated: 2022/12/11 16:57:14 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 11:24:15 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdarg.h>
 # include "struct.h"
 # include <math.h>
-# include "minilixx/theminilibx/minilibx_macos/mlx.h"
+# include "../minilibx_macos/mlx.h"
 # include <sys/errno.h>
 # include <dirent.h>
 # include <curses.h> 

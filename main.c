@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:09:01 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 10:52:35 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 15:23:11 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	hook(int key, t_scene *scene)
 // 		}
 // 	}
 // }
+
 //asdw pour bouger et f pour passer en mode bouger la lumiere
 int	main(int argc, char **argv)
 {
@@ -108,3 +109,20 @@ int	main(int argc, char **argv)
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);
 	mlx_loop(scene.w.mlx);
 }
+
+// int	main(void)
+// {
+// 	t_hit	hit_test;
+// 	t_obj	obj_test;
+// 	t_v3	new_vec;
+
+// 	srand(42);
+// 	for (int i = 0; i < 50; ++i)
+// 	{
+// 		hit_test.normal = (t_v3){0, 0, 0};
+// 		hit_test.ray.direction = (t_v3){1, 1, 1};
+// 		obj_test.dispertion = PI / 8;
+// 		new_vec = disperse(&hit_test, &obj_test);
+// 		printf("new vector : %f, %f, %f\n", new_vec.x, new_vec.y, new_vec.z);
+// 	}
+// }
