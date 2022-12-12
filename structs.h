@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 00:37:49 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 11:05:09 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ typedef struct s_obj
 	double		hauteur;
 	t_v3		color;
 	char		moved;
+	double		albedo;
+	double		dispertion;
+	t_canvas	texture;
 }	t_obj;
 
 typedef struct s_scene
@@ -74,8 +77,13 @@ typedef struct s_scene
 	t_light		*light;
 	t_list		*objects;
 	int			input_mode;
-	t_canvas	texture;
-	t_v3		move_text;
 }	t_scene;
+
+typedef struct s_hit
+{
+	t_ray	*ray;
+	t_v3	*normal;
+}	t_hit;
+
 
 #endif

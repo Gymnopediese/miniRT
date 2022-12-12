@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:42:29 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 10:47:10 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,11 @@ t_v3		*v_cunit(t_v3 *a);
 
 //retourne la moyenne de a et b
 t_v3		v_average(const t_v3 *a, const t_v3 *b);
+
+//retourne le plus grand element du vecteur
+double		v_max(const t_v3 *v);
+//retourne le plus petit element du vecteur
+double		v_min(const t_v3 *v);
+//retourne le plus grand element du vecteur absolue
+double		v_maxabs(const t_v3 *v);
 #endif

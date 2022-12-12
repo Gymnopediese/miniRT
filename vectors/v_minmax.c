@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_unit.c                                           :+:      :+:    :+:   */
+/*   v_minmax.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 17:04:37 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 09:50:00 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/12 09:48:27 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/12 09:48:35 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_v3.h"
 
-double	to_unit(const double i)
+double	v_max(const t_v3 *v)
 {
-	if (i < 0)
-		return (-1);
-	if (i > 0)
-		return (1);
-	return (i);
+	if (v->x > v->y && v->x > v->z)
+		return (v->x);
+	if (v->y > v->z)
+		return (v->y);
+	return (v->z);
 }
 
-t_v3	v_unit(const t_v3 *a)
+double	v_min(const t_v3 *v)
 {
+	if (v->x < v->y && v->x < v->z)
+		return (v->x);
+	if (v->y < v->z)
+		return (v->y);
+	return (v->z);
+}
+
+double	v_maxabs(const t_v3 *v)
+{
+	double	min;
 	double	max;
 
-	max = v_maxabs(a);
-	return ((t_v3){
-		a->x / max,
-		a->y / max,
-		a->z / max,
-	});
-}
-
-t_v3	*v_cunit(t_v3 *a)
-{
-	a->x = to_unit(a->x);
-	a->y = to_unit(a->y);
-	a->z = to_unit(a->z);
-	return (a);
+	min = fabs(v_min(v));
+	max = fabs(v_max(v));
+	if (max > min)
+		return (max);
+	return (min);
 }

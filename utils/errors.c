@@ -6,11 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:28:46 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 19:35:31 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 10:53:21 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 void	error(char *message)
 {

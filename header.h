@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 20:17:00 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 11:02:06 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		input(int key, t_scene *scene);
 void		iterate_objects(t_scene *scene);
 t_v3		v_relative_pos(double height, double width, double x, double y);
 int			ray_trace(t_scene *scene, t_obj *obj, t_ray *r);
-//to remove
 void		print_vector(t_v3 a, char *name);
+int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
+int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);
 #endif
