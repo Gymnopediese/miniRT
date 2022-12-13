@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 15:43:38 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 10:42:38 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,21 @@ int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
 
 int	hook(int key, t_scene *scene)
 {
+	int	**buffer;
+
+	buffer = malloc(scene->w.cvs.y * sizeof(*buffer)); // Pour les tests
+	for (int i = 0; i < scene->w.cvs.y; ++i)
+	{
+		buffer[i] = malloc(scene->w.cvs.x * sizeof(**buffer)); // Pour les tests
+	}
 	ft_putnbrn(key);
 	input(key, scene);
 	gradient_background(&scene->w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-	iterate_objects(scene);
+	// iterate_objects(scene);
+	// test :
+	progressive_iteration(scene, buffer, 10);
+	print_buffer(scene, buffer);
 	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
 	return (0);
 }
@@ -100,7 +110,7 @@ int	main(int argc, char **argv)
 		{
 			(t_v3){0, 0, 0},
 			(t_v3){2, 2, 2},
-		}, &sphere, &(t_v3){2, 2, 2}), "testttt");
+		}, &sphere, &(t_v3){2, 2, 2}), "test");
 	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
 	iterate_objects(&scene);
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});

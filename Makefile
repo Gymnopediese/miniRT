@@ -6,23 +6,15 @@
 #    By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/12/12 12:22:28 by albaud           ###   ########.fr        #
-=======
-#    Updated: 2022/12/12 14:02:31 by bphilago         ###   ########.fr        #
->>>>>>> acd9356d16ff4b7667baf1770e07518279c59d86
+#    Updated: 2022/12/12 16:09:03 by bphilago         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniRT
-<<<<<<< HEAD
-MAIN 		= dammier.c main.c ray_tracing.c uvmapping.c background/gradient.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c utils/v_utils.c
-=======
 MAIN 		= dammier.c main.c uvmapping.c background/gradient.c parser/atoi_life.c\
 				parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c\
 				shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c\
-				utils/v_utils.c disperse.c
->>>>>>> acd9356d16ff4b7667baf1770e07518279c59d86
+				utils/v_utils.c disperse.c ray_tracing.c
 OBJS		= ${MAIN:.c=.o}
 LIB 		= koflibc/libft.a vectors/vlib.a
 CC			= /usr/bin/gcc -g
