@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 11:04:32 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:29:55 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	progressive_iteration(t_scene *scene, int **buffer, int steps)
 				buffer[y][x] = -1;
 			else
 			{
+				r.origin = scene->camera->pos;
 				r.direction = v_relative_pos(scene->w.cvs.x, scene->w.cvs.y, x, y);
 				color = ray_trace(scene, &r, 0); // Voir si color == -1
 				if (color == -1)
@@ -96,6 +97,7 @@ void	print_buffer(t_scene *scene, int **buffer)
 		{
 			skip_x = 1;
 			color = buffer[y][x];
+			printf("%.10d ", color);
 			while (x + skip_x < scene->w.cvs.x && buffer[y][x + skip_x] == -1)
 				++skip_x;
 			x += skip_x;
@@ -114,5 +116,6 @@ void	print_buffer(t_scene *scene, int **buffer)
 		}
 		x = 0;
 		y += skip_y;
+		printf("\n");
 	}
 }
