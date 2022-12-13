@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 13:51:49 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 19:48:09 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,36 @@ double	hit_circle(const t_ray *ray, const t_obj *c)
 		return (1 / (lon / c->diametre));
 	return (0);
 }
-
-t_v3	sphere_reflection(t_ray *ray, t_obj *sphere, t_v3 *hit)
+#include <stdio.h>
+t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine)
 {
-	t_v3	c_to_h;
-	float	dot_product;
+	double	bc;
+	t_v3	ba;
+	t_v3	c;
 	t_v3	res;
-	float	projection;
 
-	c_to_h = v_rm(hit, &sphere->pos);
-	dot_product = v_dotp(&ray->direction, &c_to_h);
-	projection = dot_product / v_norm(&c_to_h);
-	res.x = 2 * projection * c_to_h.x - ray->direction.x;
-	res.y = 2 * projection * c_to_h.y - ray->direction.y;
-	res.z = 2 * projection * c_to_h.z - ray->direction.z;
-	return (res);
+	ba = v_rm(origine, &hit->ray.origin);
+	bc = cos(v_angle(&ba, &hit->normal)) * v_dist(&hit->ray.origin, origine);
+	c = v_unit(&hit->normal);
+	c = v_ponline(&hit->ray.origin, &c, bc);
+	res = v_rm(&c, origine);
+	v_cnmult(&res, 2);
+	hit->ray.direction = v_rm(&res, &hit->ray.origin);
+	return (hit);
 }
+
+// t_v3	sphere_reflection(t_ray *ray, t_obj *sphere, t_v3 *hit)
+// {
+// 	t_v3	c_to_h;
+// 	float	dot_product;
+// 	t_v3	res;
+// 	float	projection;
+
+// 	c_to_h = v_rm(hit, &sphere->pos);
+// 	dot_product = v_dotp(&ray->direction, &c_to_h);
+// 	projection = dot_product / v_norm(&c_to_h);
+// 	res.x = 2 * projection * c_to_h.x - ray->direction.x;
+// 	res.y = 2 * projection * c_to_h.y - ray->direction.y;
+// 	res.z = 2 * projection * c_to_h.z - ray->direction.z;
+// 	return (res);
+// }

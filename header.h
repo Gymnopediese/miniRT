@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/12/12 12:19:47 by albaud           ###   ########.fr       */
-=======
-/*   Updated: 2022/12/12 13:48:10 by bphilago         ###   ########.fr       */
->>>>>>> acd9356d16ff4b7667baf1770e07518279c59d86
+/*   Updated: 2022/12/12 18:43:12 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef HEADER_H
 # define HEADER_H
@@ -34,4 +31,5 @@ int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
 int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);
 // Dispersion
 t_v3		disperse(t_hit *hit, t_obj *obj);
+int			coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene);
 #endif

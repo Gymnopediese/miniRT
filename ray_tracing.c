@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:22:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 15:08:13 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/12 20:50:53 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,26 @@ t_obj	*hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 	}
 	if (v_equal(&min, &(t_v3){100000, 100000, 100000}))
 		return (0);
-	hit->ray.direction = sphere_reflection(r, obj, &hit->ray.origin);
-	hit->normal = v_rm(&hit->ray.direction, &cobj->pos);
+	hit->ray.origin = min;
+	hit = sphere_reflection(hit, &r->origin);
+	hit->normal = v_rm(&hit->ray.origin, &cobj->pos);
 	return (cobj);
 }
 
 #define RAYS_AMOUNT 3
 #define RAYS_DEPTH 3
+
+int	mergecol(int a, int b)
+{
+	int	rgb;
+
+	rgb = ((a >> 16) + (b >> 16)) / 2;
+	rgb = (rgb << 8) + (((a >> 8) & 0xff) + ((b >> 8) & 0xff)) / 2;
+	rgb = (rgb << 8) + ((a & 0xff) + (b & 0xff)) / 2;
+	// if (a != b)
+	// 	printf("%i %i %i \n", a, b, rgb);
+	return (rgb);
+}
 
 int	ray_trace(t_scene *scene, t_ray *r, int depth)
 {
@@ -57,16 +70,20 @@ int	ray_trace(t_scene *scene, t_ray *r, int depth)
 	obj_hit = hit_obj(scene, r, &hit);
 	if (obj_hit)
 	{
+		//color = coloring2(obj_hit, &hit.ray.origin, scene);
+		// print_vector(r->direction, "in\t");
+		// print_vector(hit.ray.direction, "out\t");
+		//return (color);
 		color = v_tocol(&obj_hit->color);
-		// printf("salut %ld %d\n", color, depth);
-		// print_vector(hit.ray.direction, "ricochet direction");
-		// print_vector(r->direction, "r direction");
 		while (++iter < RAYS_AMOUNT)
 		{
-			//t = ray_trace(scene, disperse(hit, obj_hit), depth + 1);
-			t = ray_trace(scene, &hit.ray, depth + 1);
+			r->origin = hit.ray.origin;
+			r->direction = disperse(&hit, obj_hit);
+			r->direction = v_nmult(&r->direction, -1);
+			t = ray_trace(scene, r, depth + 1);
+
 			if (t != -1)
-				color = (color + t) / 2;
+				color = mergecol(color, t);
 		}
 	}
 	return (color);
