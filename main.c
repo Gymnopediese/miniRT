@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 10:42:38 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:03:14 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,15 @@ int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
 	//v_cnadd(&colo, 1);
 	//print_vector(colo, "colo");
 	//v_cnmult(&colo, 255 * 0.5);
-	rgb = v_nmult(&scene->light->color, i);
-	rgb = v_average(&obj->color, &rgb);
 	//rgb = v_average(&colo, &rgb);
 	//rgb = v_average(&scene->ambiance->color, &rgb);
+	rgb = v_nmult(&scene->ambiance->color, i);
+	rgb = v_average(&obj->color, &rgb);
+	rgb = v_average(&scene->light->color, &rgb);
+	// rgb = v_nmult(&obj->color, i);
+	// rgb = v_average(&scene->light->color, &rgb);
+	//rgb = v_nmult(&scene->light->color, i);
+	//rgb = v_average(&obj->color, &rgb);
 	return (v_tocol(&rgb));
 }
 
@@ -102,15 +107,6 @@ int	main(int argc, char **argv)
 	scene.input_mode = -1;
 	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-
-	t_obj sphere;
-	sphere.pos = (t_v3){3, 3, 2};
-	sphere.diametre = 2;
-	print_vector(sphere_reflection(&(t_ray)
-		{
-			(t_v3){0, 0, 0},
-			(t_v3){2, 2, 2},
-		}, &sphere, &(t_v3){2, 2, 2}), "test");
 	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
 	iterate_objects(&scene);
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
@@ -119,6 +115,13 @@ int	main(int argc, char **argv)
 	mlx_loop(scene.w.mlx);
 }
 
+// t_hit	hit;
+
+	// hit.normal = (t_v3){-1,-1, 0};
+	// hit.ray.origin = (t_v3){2,2, 2};
+	// print_vector(sphere_reflection(&hit, &(t_v3){0, 0, 0})->ray.direction, "testttt");
+	// return (0);
+	
 // int	main(void)
 // {
 // 	t_hit	hit_test;

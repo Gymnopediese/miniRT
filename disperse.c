@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   disperse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:29:26 by bphilago          #+#    #+#             */
-/*   Updated: 2022/12/12 15:09:22 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:07:12 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 double	rand01(void)
 {
 
-	return ((double)((rand() % (100000000)) / 1000000000.0));
+	return ((double)((rand() % (100000000)) / 100000000.0));
 }
 
 t_v3	std_normal(t_v3 *vec)
@@ -40,6 +40,15 @@ t_v3	std_normal(t_v3 *vec)
 	return ((t_v3){0.0, 0.0, 0.0});
 }
 
+double	range(double num, double min, double max)
+{
+	if (num > max)
+		return (max);
+	if (num < min)
+		return (min);
+	return (num);
+}
+
 // Mettre des pointeurs pour pouvoir les recevoir et les recycler
 t_v3	disperse(t_hit *hit, t_obj *obj)
 {
@@ -49,16 +58,17 @@ t_v3	disperse(t_hit *hit, t_obj *obj)
 	double	theta;
 	double	r;
 
+	(void) obj;
 	i = std_normal(&hit->ray.direction);
 	j = v_v3mult(&i, &hit->ray.direction);
 	i = v_unit(&i);
 	j = v_unit(&j);
-	r = sqrt(rand01());
-	theta = rand01() * 2 * PI;
+	r = sqrt(range(- 0.2 + rand01(), 0, 1));
+	theta = range(- 0.2 + rand01(), 0, 1) * 2 * PI;
 	i = v_nmult(&i, r * cos(theta));
 	j = v_nmult(&j, r * sin(theta));
 	target = v_unit(&hit->ray.direction);
-	target = v_add(&target, &i);
-	target = v_add(&target, &j);
+	v_cadd(&target, &i);
+	v_cadd(&target, &j);
 	return (target);
 }
