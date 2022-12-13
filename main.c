@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 11:30:35 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/13 15:05:48 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	hook(int key, t_scene *scene)
 		&(t_v3){228, 119, 119});
 	// iterate_objects(scene);
 	// test :
-	progressive_iteration(scene, buffer, 5);
+	progressive_iteration(scene, buffer, 3);
 	print_buffer(scene, buffer);
 	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
 	return (0);

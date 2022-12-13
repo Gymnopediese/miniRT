@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 11:29:55 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:34:29 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	print_buffer(t_scene *scene, int **buffer)
 		{
 			skip_x = 1;
 			color = buffer[y][x];
-			printf("%.10d ", color);
 			while (x + skip_x < scene->w.cvs.x && buffer[y][x + skip_x] == -1)
 				++skip_x;
 			x += skip_x;
@@ -116,6 +115,5 @@ void	print_buffer(t_scene *scene, int **buffer)
 		}
 		x = 0;
 		y += skip_y;
-		printf("\n");
 	}
 }

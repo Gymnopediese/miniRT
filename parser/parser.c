@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:42:53 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:25:28 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,6 @@ void	parse_rt_file(t_scene *scene, char *file_name)
 	scene->objects = 0;
 	while (lines[++i])
 		ligne_to_obj(lines[i], scene);
+	v_cnmult(&scene->light->color, scene->light->ratio / 255.0);
+	v_cnmult(&scene->ambiance->color, scene->ambiance->ratio / 255.0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 19:48:09 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:04:19 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,23 @@ t_v3	*sphere_intersect(t_ray *ray, t_obj *sphere, t_v3 *hit)
 	discriminant = n[1] * n[1] - 4 * n[0] * n[2];
 	if (discriminant < 0)
 		return (0);
-	n[3] = (-n[1] + sqrt(discriminant)) / (2 * n[0]);
-	n[4] = (-n[1] - sqrt(discriminant)) / (2 * n[0]);
-	if (n[3] < n[4])
+	n[3] = (-n[1] + sqrt(discriminant)) / (2.0 * n[0]);
+	n[4] = (-n[1] - sqrt(discriminant)) / (2.0 * n[0]);
+	if (n[3] <= n[4])
 	{
+		if (n[3] >= 0 - __FLT_EPSILON__)
+		{
+			*hit = v_ponline(&ray->origin, &ray->direction, n[3]);
+			return (hit);
+		}
+		return (0);
+	}
+	if (n[4] >= 0 - __FLT_EPSILON__)
+	{		
 		*hit = v_ponline(&ray->origin, &ray->direction, n[4]);
 		return (hit);
 	}
-	*hit = v_ponline(&ray->origin, &ray->direction, n[3]);
-	return (hit);
+	return (0);
 }
 
 double	hit_circle(const t_ray *ray, const t_obj *c)
