@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 15:41:58 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 23:37:34 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,7 @@ int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);
 // Dispersion
 t_v3		disperse(t_hit *hit, t_obj *obj);
 int			coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene);
+// test
+void		print_buffer(t_scene *scene, int **buffer);
+void		progressive_iteration(t_scene *scene, int **buffer, int steps);
 #endif

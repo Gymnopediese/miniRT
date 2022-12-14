@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 17:11:22 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 23:39:50 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,6 @@ void	parse_rt_file(t_scene *scene, char *file_name)
 		if (lines[i][0])
 			ligne_to_obj(lines[i], scene);
 	}
+	v_cnmult(&scene->light->color, scene->light->ratio / 255.0);
+	v_cnmult(&scene->ambiance->color, scene->ambiance->ratio / 255.0);
 }
