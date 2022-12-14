@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 21:10:39 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 16:14:33 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 20:36:17 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 double	v_norm(const t_v3 *a)
 {
-	return (sqrtf(pow(a->x, 2) + pow(a->y, 2) + pow(a->z, 2)));
+	return (sqrt(pow(a->x, 2) + pow(a->y, 2) + pow(a->z, 2)));
 }

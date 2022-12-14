@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 19:50:48 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:15:41 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,14 @@ int	hook(int key, t_scene *scene)
 	return (0);
 }
 
-// void clone (t_canvas dest, t_canvas src)
-// {
-// 	for (int i = 0; i < dest.x; i++)
-// 	{
-// 		for (int j = 0; j < dest.y; j++)
-// 		{
-// 			ft_put_pixel(&dest, i, j, get_pix(&src, i, j));
-// 		}
-// 	}
-// }
+void	apply_matrices(t_list *o, t_scene *scene)
+{
+	while (o)
+	{
+		m_transform(o->data, scene);
+		o = o->next;
+	}
+}
 
 //asdw pour bouger et f pour passer en mode bouger la lumiere
 int	main(int argc, char **argv)
@@ -91,16 +89,23 @@ int	main(int argc, char **argv)
 		ft_putendl("miniRT: usage: ./miniRT <file.rt>");
 		return (0);
 	}
+	scene.intersections[0] = &sphere_intersect;
+	scene.intersections[1] = &plan_intersect;
+	scene.intersections[2] = &cylindre_intersect;
+	scene.intersections[3] = &cone_intersect;
+	scene.intersections[4] = &hyperboloid_intersect;
 	parse_rt_file(&scene, argv[1]);
 	ft_mlx_init(&scene.w, 800, 800, "miniRT");
 	scene.w.cvs = ft_init_canvas(scene.w.mlx, 800, 800);
 	scene.input_mode = -1;
 	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
+	apply_matrices(scene.objects, &scene);
 	iterate_objects(&scene);
+	ft_putendl("fuck");
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
 	print_scene(&scene);
+	ft_putendl("mmm");
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);
 	mlx_loop(scene.w.mlx);
 }

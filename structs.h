@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 15:44:00 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 02:31:52 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,25 @@ typedef struct s_obj
 	double		albedo;
 	double		dispertion;
 	t_canvas	texture;
+	double		transform[4][4];
+	double		inverse_transform[4][4];
 }	t_obj;
-
-typedef struct s_scene
-{
-	t_window	w;
-	t_ambiance	*ambiance;
-	t_camera	*camera;
-	t_light		*light;
-	t_list		*objects;
-	int			input_mode;
-}	t_scene;
 
 typedef struct s_hit
 {
 	t_ray	ray;
 	t_v3	normal;
 }	t_hit;
+
+typedef struct s_scene
+{
+	t_window		w;
+	t_ambiance		*ambiance;
+	t_camera		*camera;
+	t_light			*light;
+	t_list			*objects;
+	int				input_mode;
+	t_v3			*(*intersections[6])();
+}	t_scene;
 
 #endif

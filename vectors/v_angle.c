@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 21:14:37 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 14:58:24 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 20:35:03 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 //θ = cos-1 [ (a · b) / (|a| |b|) ]
 double	v_angle(const t_v3 *a, const t_v3 *b)
 {
-	return (acosf((v_dotp(a, b) / (v_norm(a) * v_norm(b)))));
+	return (acos((v_dotp(a, b) / (v_norm(a) * v_norm(b)))));
 }

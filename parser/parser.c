@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/11 21:42:53 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 17:11:22 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ enum e_id	get_id(char *line)
 	else if (ft_strcmp(line, "cy") == 0)
 		return (CYLINDRE);
 	else if (ft_strcmp(line, "cn") == 0)
-		return (CYLINDRE);
+		return (CONE);
 	else if (ft_strcmp(line, "hb") == 0)
-		return (CYLINDRE);
+		return (HYPERBOILD);
 	else if (ft_strcmp(line, "pb") == 0)
 		return (CYLINDRE);
 	error("invalid object type in .rt file");
@@ -76,6 +76,17 @@ void	ligne_to_obj(char *line, t_scene *scene)
 	ft_free_pp((void **)argv);
 }
 
+int	comment(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i] && str[i] != '#')
+		;
+	str[i] = 0;
+	return (1);
+}
+
 void	parse_rt_file(t_scene *scene, char *file_name)
 {
 	char	**lines;
@@ -90,6 +101,9 @@ void	parse_rt_file(t_scene *scene, char *file_name)
 	scene->camera = 0;
 	scene->light = 0;
 	scene->objects = 0;
-	while (lines[++i])
-		ligne_to_obj(lines[i], scene);
+	while (lines[++i] && comment(lines[i]))
+	{
+		if (lines[i][0])
+			ligne_to_obj(lines[i], scene);
+	}
 }

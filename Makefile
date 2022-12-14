@@ -6,12 +6,12 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-#    Updated: 2022/12/12 15:46:08 by albaud           ###   ########.fr        #
+#    Updated: 2022/12/14 10:59:48 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniRT
-MAIN 		= dammier.c disperse.c main.c ray_tracing.c uvmapping.c background/gradient.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c utils/v_utils.c
+MAIN 		= dammier.c disperse.c main.c ray_tracing.c uvmapping.c background/gradient.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c shapes/cone.c shapes/cylindre.c shapes/hyperboloid.c shapes/matrix.c shapes/plan.c shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c utils/v_utils.c
 OBJS		= ${MAIN:.c=.o}
 LIB 		= koflibc/libft.a vectors/vlib.a
 CC			= /usr/bin/gcc
@@ -32,7 +32,7 @@ $(LIB)	:
 		make -C vectors
 
 c		:
-		find *.c */*.c | grep -v *vectors*| tr '\n' ' ' 
+		find *.c */*.c | grep -v *vectors* | grep -v *minilibx_macos* | tr '\n' ' ' 
 
 clean	:
 		rm -f ${OBJS}

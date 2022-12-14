@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:29:26 by bphilago          #+#    #+#             */
-/*   Updated: 2022/12/12 21:07:12 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 12:38:50 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_v3	disperse(t_hit *hit, t_obj *obj)
 	j = v_v3mult(&i, &hit->ray.direction);
 	i = v_unit(&i);
 	j = v_unit(&j);
-	r = sqrt(range(- 0.2 + rand01(), 0, 1));
-	theta = range(- 0.2 + rand01(), 0, 1) * 2 * PI;
+	r = sqrt(range(-0.1 + rand01(), 0, 1));
+	theta = range(0 + rand01(), 0, 1) * 2 * PI;
 	i = v_nmult(&i, r * cos(theta));
 	j = v_nmult(&j, r * sin(theta));
 	target = v_unit(&hit->ray.direction);
