@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hyperboloid.c                                      :+:      :+:    :+:   */
+/*   paraboloid.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:50:34 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 10:02:42 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 10:40:56 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define B 1
 #define C 1
 
-t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
+t_v3	*paraboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 {
 	double	a;
 	double	b;
@@ -32,9 +32,9 @@ t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 	ym = A * A * C * C;
 	zm = B * B * A * A;
 	new_dir(ray, &r, cylindre);
-	a = r.direction.x * r.direction.x * xm + r.direction.y * r.direction.y * ym - r.direction.z * r.direction.z * zm;
-	b = 2 * (r.direction.x * r.origin.x * xm + r.direction.y * r.origin.y * ym - r.direction.z * r.origin.z * zm);
-	c = r.origin.x * r.origin.x * xm + r.origin.y * r.origin.y * ym - r.origin.z * r.origin.z * zm - 1;
+	a = r.direction.x * r.direction.x * xm + r.direction.y * r.direction.y * ym - 2 * r.direction.z * zm;
+	b = 2 * (r.direction.x * r.origin.x * xm + r.direction.y * r.origin.y * ym - 2 * r.origin.z * zm);
+	c = r.origin.x * r.origin.x * xm + r.origin.y * r.origin.y * ym - 2 * r.origin.z * zm;
 	x = b * b - 4 * a * c;
 	if (x <= 0)
 		return (0);
@@ -44,7 +44,7 @@ t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 		r.origin = v_ponline(&r.origin, &r.direction, c);
 	else
 		r.origin = v_ponline(&r.origin, &r.direction, x);
-	if (c <= 0 || x <= 0 || fabs(r.origin.z) > 2)
+	if (fabs(r.origin.z) > 10)//c <= 0 || x <= 0 || 
 		return (0);
 	r.origin = m_3mult(&r.origin, cylindre->transform);
 	hit->x = r.origin.x;
@@ -53,20 +53,3 @@ t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 
 	return (hit);
 }
-
-// t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine)
-// {
-// 	double	bc;
-// 	t_v3	ba;
-// 	t_v3	c;
-// 	t_v3	res;
-
-// 	ba = v_rm(origine, &hit->ray.origin);
-// 	bc = cos(v_angle(&ba, &hit->normal)) * v_dist(&hit->ray.origin, origine);
-// 	c = v_unit(&hit->normal);
-// 	c = v_ponline(&hit->ray.origin, &c, bc);
-// 	res = v_rm(&c, origine);
-// 	v_cnmult(&res, 2);
-// 	hit->ray.direction = v_rm(&res, &hit->ray.origin);
-// 	return (hit);
-// }

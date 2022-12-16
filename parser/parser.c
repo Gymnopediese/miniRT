@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/14 23:39:50 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 10:21:05 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ enum e_id	get_id(char *line)
 		return (CONE);
 	else if (ft_strcmp(line, "hb") == 0)
 		return (HYPERBOILD);
+	else if (ft_strcmp(line, "hb2") == 0)
+		return (HYPERBOILD2);
 	else if (ft_strcmp(line, "pb") == 0)
-		return (CYLINDRE);
+		return (PARABOLOID);
+	else if (ft_strcmp(line, "pb2") == 0)
+		return (PARABOLOID2);
 	error("invalid object type in .rt file");
 	return (0);
 }
@@ -51,6 +55,12 @@ void	ligne_to_shape(char **argv, t_scene *scene, enum e_id id)
 		init_cone(argv, obj);
 	else if (id == HYPERBOILD)
 		init_hyperboloid(argv, obj);
+	else if (id == HYPERBOILD2)
+		init_hyperboloid2(argv, obj);
+	else if (id == PARABOLOID)
+		init_paraboloid(argv, obj);
+	else if (id == PARABOLOID2)
+		init_paraboloid2(argv, obj);
 	ft_lstadd_back(&scene->objects, ft_lstnew(obj));
 }
 

@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/14 23:41:10 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 23:56:24 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,13 @@ void	print_buffer(t_scene *scene, int **buffer)
 				++skip_x;
 			x += skip_x;
 			tmp_y = skip_y;
-			tmp_x = skip_x;
+
 			while (tmp_y > 0)
 			{
 				tmp_x = skip_x;
 				while (tmp_x > 0)
 				{
+					
 					ft_put_pixel(&scene->w.cvs, x - tmp_x, y - tmp_y, color);
 					tmp_x -= 1;
 				}

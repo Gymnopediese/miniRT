@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_utils.c                                          :+:      :+:    :+:   */
+/*   v_printn.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 19:56:43 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/15 20:04:41 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/16 08:38:17 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/16 08:57:32 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
+#include "t_v3.h"
 
-t_v3	v_relative_pos(double height, double width, double x, double y)
+void	v_nrprintn(t_v3 a, const char *name)
 {
-	return ((t_v3){
-		(x - width / 2) * 2 / width,
-		(y - height / 2) * 2 / height,
-		1,
-	});
+	printf("%s(%f, %f, %f)\n", name, a.x, a.y, a.z);
+}
+
+void	v_nprintn(const t_v3 *a, const char *name)
+{
+	printf("%s(%f, %f, %f)\n", name, a->x, a->y, a->z);
+}
+
+void	v_rprintn(t_v3 a)
+{
+	printf("(%f, %f, %f)\n", a.x, a.y, a.z);
+}
+
+void	v_printn(const t_v3 *a)
+{
+	printf("(%f, %f, %f)\n", a->x, a->y, a->z);
 }

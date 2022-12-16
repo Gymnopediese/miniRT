@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   v_utils.c                                          :+:      :+:    :+:   */
+/*   gui.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 19:56:43 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/15 20:04:41 by albaud           ###   ########.fr       */
+/*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/16 09:09:06 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header.h"
 
-t_v3	v_relative_pos(double height, double width, double x, double y)
+#ifndef GUI_H
+# define GUI_H
+
+# include "../header.h"
+
+typedef struct s_gui
 {
-	return ((t_v3){
-		(x - width / 2) * 2 / width,
-		(y - height / 2) * 2 / height,
-		1,
-	});
-}
+	t_window	w;
+	t_scene		*scene;
+}	t_gui;
+
+#endif

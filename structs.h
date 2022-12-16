@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/14 02:31:52 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 11:32:47 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ enum e_id
 	SPHERE,
 	PLAN,
 	CYLINDRE,
-	CONE,
 	HYPERBOILD,
+	CONE,
+	HYPERBOILD2,
 	PARABOLOID,
+	PARABOLOID2,
 };
 
 typedef struct s_ray
@@ -76,6 +78,7 @@ typedef struct s_hit
 {
 	t_ray	ray;
 	t_v3	normal;
+	t_obj	*obj;
 }	t_hit;
 
 typedef struct s_scene
@@ -86,7 +89,8 @@ typedef struct s_scene
 	t_light			*light;
 	t_list			*objects;
 	int				input_mode;
-	t_v3			*(*intersections[6])();
+	t_v3			*(*intersections[8])();
+	int				(*hook)();
 }	t_scene;
 
 #endif

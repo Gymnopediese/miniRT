@@ -1,83 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_shapes.c                                      :+:      :+:    :+:   */
+/*   init_shapes_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 14:06:36 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 09:41:33 by albaud           ###   ########.fr       */
+/*   Created: 2022/12/16 10:19:08 by albaud            #+#    #+#             */
+/*   Updated: 2022/12/16 10:30:28 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	init_sphere(char **argv, t_obj *obj)
-{
-	if (ft_strtablen(argv) != 4)
-		error("Wrong arguments number for a sphere");
-	obj->id = SPHERE;
-	obj->pos = ft_atovedo(argv[1], 0, 0);
-	obj->diametre = ft_atodor(argv[2], 0, 0);
-	if (obj->diametre < 0)
-		error("Wrong diameter for a sphere");
-	obj->color = ft_atovei(argv[3], 0, 255);
-}
-
-void	init_plan(char **argv, t_obj *obj)
-{
-	if (ft_strtablen(argv) != 4)
-		error("Wrong arguments number for a sphere");
-	obj->id = PLAN;
-	obj->pos = ft_atovedo(argv[1], 0, 0);
-	obj->orientation = ft_atovedo(argv[2], -1, 1);
-	obj->color = ft_atovei(argv[3], 0, 255);
-}
-
-void	init_cylindre(char **argv, t_obj *obj)
+void	init_hyperboloid2(char **argv, t_obj *obj)
 {
 	if (ft_strtablen(argv) != 6)
-		error("Wrong arguments number for a cylindre");
-	obj->id = CYLINDRE;
+		error("Wrong arguments number for a hyperboloid2");
+	obj->id = HYPERBOILD2;
 	obj->pos = ft_atovedo(argv[1], 0, 0);
 	obj->orientation = ft_atovedo(argv[2], -1, 1);
 	obj->diametre = ft_atodor(argv[3], 0, 0);
 	if (obj->diametre < 0)
-		error("Wrong diameter for a cylindre");
+		error("Wrong diameter for a hyperboloid2");
 	obj->hauteur = ft_atodor(argv[4], 0, 0);
 	if (obj->hauteur < 0)
-		error("Wrong hight for a cylindre");
+		error("Wrong hight for a hyperboloid2");
 	obj->color = ft_atovei(argv[5], 0, 255);
 }
 
-void	init_cone(char **argv, t_obj *obj)
+void	init_paraboloid(char **argv, t_obj *obj)
 {
 	if (ft_strtablen(argv) != 6)
-		error("Wrong arguments number for a cone");
-	obj->id = CONE;
+		error("Wrong arguments number for a paraboloid");
+	obj->id = PARABOLOID;
 	obj->pos = ft_atovedo(argv[1], 0, 0);
 	obj->orientation = ft_atovedo(argv[2], -1, 1);
 	obj->diametre = ft_atodor(argv[3], 0, 0);
 	if (obj->diametre < 0)
-		error("Wrong diameter for a cone");
+		error("Wrong diameter for a paraboloid");
 	obj->hauteur = ft_atodor(argv[4], 0, 0);
 	if (obj->hauteur < 0)
-		error("Wrong hight for a cone");
+		error("Wrong hight for a paraboloid");
 	obj->color = ft_atovei(argv[5], 0, 255);
 }
 
-void	init_hyperboloid(char **argv, t_obj *obj)
+void	init_paraboloid2(char **argv, t_obj *obj)
 {
 	if (ft_strtablen(argv) != 6)
-		error("Wrong arguments number for a hyperboloid");
-	obj->id = HYPERBOILD;
+		error("Wrong arguments number for a paraboloid2");
+	obj->id = PARABOLOID2;
 	obj->pos = ft_atovedo(argv[1], 0, 0);
 	obj->orientation = ft_atovedo(argv[2], -1, 1);
 	obj->diametre = ft_atodor(argv[3], 0, 0);
 	if (obj->diametre < 0)
-		error("Wrong diameter for a hyperboloid");
+		error("Wrong diameter for a paraboloid2");
 	obj->hauteur = ft_atodor(argv[4], 0, 0);
 	if (obj->hauteur < 0)
-		error("Wrong hight for a hyperboloid");
+		error("Wrong hight for a paraboloid2");
 	obj->color = ft_atovei(argv[5], 0, 255);
 }

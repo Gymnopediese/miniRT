@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:22:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/14 23:39:20 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/15 13:39:28 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int	ray_trace(t_scene *scene, t_ray *r, int depth)
 		// color = coloring2(obj_hit, &hit.ray.origin, scene);
 		// print_vector(r->direction, "in\t");
 		// print_vector(hit.ray.direction, "out\t");
-		//return (color);
+		return (v_tocol(&obj_hit->color));
+
 		tmp_color = obj_hit->color;
 		brightness(&tmp_color, &r->origin, &hit, scene);
 		color = v_tocol(&tmp_color);

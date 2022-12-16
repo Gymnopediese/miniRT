@@ -1,0 +1,46 @@
+
+// int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
+// {
+// 	t_v3	rgb;
+// 	double	i;
+
+// 	i = 1 - (v_dist(hit, &scene->light->pos)
+// 			/ v_dist(&obj->pos, &scene->light->pos));
+// 	(void) rgb;
+// 	if (i < 0)
+// 		i = 0;
+// 	rgb = v_nmult(&scene->light->color, i);
+// 	rgb = v_average(&obj->color, &rgb);
+// 	rgb = v_average(&scene->ambiance->color, &rgb);
+// 	return (v_tocol(&rgb));
+// }
+
+// int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
+// {
+// 	t_v3	rgb;
+// 	double	i;
+// 	t_v3	hit_light;
+// 	t_v3	obj_normal;
+// 	//t_v3	colo;
+
+// 	hit_light = v_rm(&scene->light->pos, hit);
+// 	obj_normal = v_rm(hit, &obj->pos);
+// 	i = 1 - v_angle(&obj_normal, &hit_light) / (PI / 2);
+// 	if (i < 0)
+// 		i = 0;
+// 	//hit->z += 1;
+// 	//colo = v_unit(hit);
+// 	//v_cnadd(&colo, 1);
+// 	//print_vector(colo, "colo");
+// 	//v_cnmult(&colo, 255 * 0.5);
+// 	//rgb = v_average(&colo, &rgb);
+// 	//rgb = v_average(&scene->ambiance->color, &rgb);
+// 	rgb = v_nmult(&scene->ambiance->color, i);
+// 	rgb = v_average(&obj->color, &rgb);
+// 	rgb = v_average(&scene->light->color, &rgb);
+// 	// rgb = v_nmult(&obj->color, i);
+// 	// rgb = v_average(&scene->light->color, &rgb);
+// 	//rgb = v_nmult(&scene->light->color, i);
+// 	//rgb = v_average(&obj->color, &rgb);
+// 	return (v_tocol(&rgb));
+// }

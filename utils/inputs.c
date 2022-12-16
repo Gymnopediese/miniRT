@@ -6,12 +6,12 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:58:30 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 11:01:52 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 10:02:08 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-#define ADD -0.1
+#define ADD 0.1
 
 void	input_camera(int key, t_scene *scene)
 {

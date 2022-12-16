@@ -6,13 +6,13 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:06:14 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 15:11:03 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 08:57:39 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "t_v3.h"
 
-t_v3	v_shortd(const t_v3 *a, const t_v3 *b, const t_v3 *p)
-{
+// t_v3	v_shortd(const t_v3 *a, const t_v3 *b, const t_v3 *p)
+// {
 	
-}
+// }
