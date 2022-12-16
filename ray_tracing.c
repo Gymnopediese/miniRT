@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:22:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:50:08 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:02:33 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ t_obj	*hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 	while (objects)
 	{
 		obj = objects->data;
-		if (sphere_intersect(r, obj, &hit->ray.origin)
+		if (scene->intersections[obj->id - 3](r, obj, &hit->ray.origin)
 			&& v_dist(&r->origin, &hit->ray.origin) < v_dist(&min, &r->origin)
-			&& v_dist(&r->origin, &hit->ray.origin) > __FLT_EPSILON__) // Probleme
+			&& v_dist(&r->origin, &hit->ray.origin) > __FLT_EPSILON__)
 		{
 			min = hit->ray.origin;
 			cobj = obj;
@@ -102,7 +102,7 @@ t_obj	*hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 	if (v_equal(&min, &(t_v3){100000, 100000, 100000}))
 		return (0);
 	hit->ray.origin = min;
-	hit = sphere_reflection(hit, &r->origin);
+	//hit = sphere_reflection(hit, &r->origin);
 	hit->normal = v_rm(&hit->ray.origin, &cobj->pos);
 	return (cobj);
 }

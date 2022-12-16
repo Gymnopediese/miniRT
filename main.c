@@ -6,57 +6,20 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/14 11:37:16 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:58:31 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include "parser/parser.h"
 
-int	coloring(t_obj	*obj, t_v3 *hit, t_scene *scene)
+void	 apply_matrices(t_list *o, t_scene *scene)
 {
-	t_v3	rgb;
-	double	i;
-
-	i = 1 - (v_dist(hit, &scene->light->pos)
-			/ v_dist(&obj->pos, &scene->light->pos));
-	(void) rgb;
-	if (i < 0)
-		i = 0;
-	rgb = v_nmult(&scene->light->color, i);
-	rgb = v_average(&obj->color, &rgb);
-	rgb = v_average(&scene->ambiance->color, &rgb);
-	return (v_tocol(&rgb));
-}
-
-int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
-{
-	t_v3	rgb;
-	double	i;
-	t_v3	hit_light;
-	t_v3	obj_normal;
-	//t_v3	colo;
-
-	hit_light = v_rm(&scene->light->pos, hit);
-	obj_normal = v_rm(hit, &obj->pos);
-	i = 1 - v_angle(&obj_normal, &hit_light) / (PI / 2);
-	if (i < 0)
-		i = 0;
-	//hit->z += 1;
-	//colo = v_unit(hit);
-	//v_cnadd(&colo, 1);
-	//print_vector(colo, "colo");
-	//v_cnmult(&colo, 255 * 0.5);
-	//rgb = v_average(&colo, &rgb);
-	//rgb = v_average(&scene->ambiance->color, &rgb);
-	rgb = v_nmult(&scene->ambiance->color, i);
-	rgb = v_average(&obj->color, &rgb);
-	rgb = v_average(&scene->light->color, &rgb);
-	// rgb = v_nmult(&obj->color, i);
-	// rgb = v_average(&scene->light->color, &rgb);
-	//rgb = v_nmult(&scene->light->color, i);
-	//rgb = v_average(&obj->color, &rgb);
-	return (v_tocol(&rgb));
+	while (o)
+	{
+		m_transform(o->data, scene);
+		o = o->next;
+	}
 }
 
 int	hook(int key, t_scene *scene)
@@ -68,58 +31,123 @@ int	hook(int key, t_scene *scene)
 	{
 		buffer[i] = malloc(scene->w.cvs.x * sizeof(**buffer)); // Pour les tests
 	}
-	ft_putnbrn(key);
 	input(key, scene);
 	gradient_background(&scene->w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
-	// iterate_objects(scene);
-	// test :
+	buffer = malloc(scene->w.cvs.y * sizeof(*buffer)); // Pour les tests
+	for (int i = 0; i < scene->w.cvs.y; ++i)
+	{
+		buffer[i] = malloc(scene->w.cvs.x * sizeof(**buffer)); // Pour les tests
+	}
 	progressive_iteration(scene, buffer, STEPS);
 	print_buffer(scene, buffer);
 	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
 	return (0);
 }
 
-// void clone (t_canvas dest, t_canvas src)
+//recopie speed test
+//1000000
+//recopie
+//make run  0,67s user 0,61s system 15% cpu 8,068 total
+//make run  0,66s user 0,61s system 15% cpu 8,415 total
+//make run  0,55s user 0,58s system 14% cpu 7,805 total
+//non recopie
+//make run  0,65s user 0,60s system 14% cpu 8,587 total
+//make run  0,66s user 0,60s system 15% cpu 8,196 total
+//make run  0,65s user 0,60s system 13% cpu 9,044 total
+//100000000 add
+//make run  0,95s user 0,03s system 85% cpu 1,147 total
+//make run  0,96s user 0,04s system 84% cpu 1,168 total
+//make run  0,97s user 0,04s system 85% cpu 1,187 total
+//Sans reco
+//make run  0,49s user 0,04s system 77% cpu 0,686 total
+//make run  0,48s user 0,04s system 73% cpu 0,703 total
+//make run  0,48s user 0,04s system 74% cpu 0,694 total
+// int	main(void)
 // {
-// 	for (int i = 0; i < dest.x; i++)
+// 	int			i = 0;
+// 	t_v3	salam;
+// 	t_v3	salam2;
+// 	salam = (t_v3){1,2,3};
+// 	salam2 = (t_v3){0,0,0};
+// 	while (++i < 100000000)
 // 	{
-// 		for (int j = 0; j < dest.y; j++)
-// 		{
-// 			ft_put_pixel(&dest, i, j, get_pix(&src, i, j));
-// 		}
+// 		v_cadd(&salam, &salam2);
 // 	}
 // }
+
+void	init_intersects(t_scene *scene)
+{
+	scene->intersections[0] = &sphere_intersect;
+	scene->intersections[1] = &plan_intersect;
+	scene->intersections[2] = &cylindre_intersect;
+	scene->intersections[3] = &hyperboloid_intersect;
+	scene->intersections[4] = &cone_intersect;
+	scene->intersections[5] = &hyperboloid2_intersect;
+	scene->intersections[6] = &paraboloid_intersect;
+	scene->intersections[7] = &paraboloid2_intersect;
+}
+
+void	init_scene(t_scene *scene)
+{
+	t_v3		**buffer;
+
+	scene->hook = &hook;
+	ft_mlx_init(&scene->w, 800, 800, "miniRT");
+	scene->w.cvs = ft_init_canvas(scene->w.mlx, 800, 800);
+	scene->input_mode = -1;
+	gradient_background(&scene->w.cvs, &(t_v3){100, 228, 228},
+		&(t_v3){228, 119, 119});
+	apply_matrices(scene->objects, scene);
+	init_intersects(scene);
+	progressive_iteration(&scene, buffer, STEPS);
+	print_buffer(&scene, buffer);
+	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
+	print_scene(scene);
+}
+
+int	ghook(int key, t_gui *gui)
+{
+	gui->scene->hook(key, gui->scene);
+	return (0);
+}
+
+int	mousetest(int key, int x, int y, t_scene *scene)
+{
+	(void) x;
+	(void) y;
+	(void) scene;
+	ft_putnbrn(key);
+	printf("jojo/n");
+	return (0);
+}
 
 //asdw pour bouger et f pour passer en mode bouger la lumiere
 int	main(int argc, char **argv)
 {
 	t_scene		scene;
-	t_v3		**buffer;
+	t_gui		gui;
+	int 		pid;
 
 	if (argc != 2)
 	{
 		ft_putendl("miniRT: usage: ./miniRT <file.rt>");
 		return (0);
 	}
+	gui.scene = &scene;
+	ft_mlx_init(&gui.w, 800, 800, "miniRT_gui");
 	parse_rt_file(&scene, argv[1]);
-	ft_mlx_init(&scene.w, 800, 800, "miniRT");
-	scene.w.cvs = ft_init_canvas(scene.w.mlx, 800, 800);
-	scene.input_mode = -1;
-	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
-		&(t_v3){228, 119, 119});
-	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
-	buffer = malloc(scene.w.cvs.y * sizeof(*buffer)); // Pour les tests
-	for (int i = 0; i < scene.w.cvs.y; ++i)
-	{
-		buffer[i] = malloc(scene.w.cvs.x * sizeof(**buffer)); // Pour les tests
-	}
-	progressive_iteration(&scene, buffer, STEPS);
-	print_buffer(&scene, buffer);
-	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
-	print_scene(&scene);
+	init_scene(&scene);
+	mlx_hook(gui.w.win, 2, 0, hook, &scene);
+	mlx_hook(scene.w.win, 4, 0, mousetest, &scene);
+	mlx_hook(scene.w.win, 5, 0, mousetest, &scene);
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);
 	mlx_loop(scene.w.mlx);
+	// pid = fork();
+	// if (pid == 0)
+	// 	mlx_loop(gui.w.mlx);
+	// else
+	// 	mlx_loop(scene.w.mlx);
 }
 
 // t_hit	hit;

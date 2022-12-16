@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/15 11:32:25 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:03:14 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,12 +149,13 @@ void	print_buffer(t_scene *scene, t_v3 **buffer)
 				++skip_x;
 			x += skip_x;
 			tmp_y = skip_y;
-			tmp_x = skip_x;
+
 			while (tmp_y > 0)
 			{
 				tmp_x = skip_x;
 				while (tmp_x > 0)
 				{
+					
 					ft_put_pixel(&scene->w.cvs, x - tmp_x, y - tmp_y, color);
 					tmp_x -= 1;
 				}

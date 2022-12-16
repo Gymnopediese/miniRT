@@ -3,18 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+         #
+#    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
-#    Updated: 2022/12/13 14:40:39 by bphilago         ###   ########.fr        #
+#    Updated: 2022/12/16 10:27:04 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= miniRT
-MAIN 		= dammier.c main.c uvmapping.c background/gradient.c parser/atoi_life.c\
-				parser/init_objs.c parser/init_shapes.c parser/parser.c parser/parser_utils.c\
-				shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c\
-				utils/v_utils.c disperse.c ray_tracing.c
+MAIN 		= dammier.c disperse.c main.c ray_tracing.c uvmapping.c background/gradient.c parser/atoi_life.c parser/init_objs.c parser/init_shapes.c parser/init_shapes_2.c parser/parser.c parser/parser_utils.c shapes/cone.c shapes/cylindre.c shapes/hyperboloid.c shapes/hyperboloid2.c shapes/matrix.c shapes/paraboloid.c shapes/paraboloid2.c shapes/plan.c shapes/sphere.c utils/debug.c utils/errors.c utils/inputs.c utils/iterate_objects.c utils/v_utils.c
 OBJS		= ${MAIN:.c=.o}
 LIB 		= koflibc/libft.a vectors/vlib.a
 CC			= /usr/bin/gcc -g
@@ -34,7 +31,7 @@ $(NAME)	: ${OBJS}
 		${CC} ${CFLAGS} ${LIBS} ${FRAMEWORK} -o ${NAME} ${OBJS} ${LIB}
 
 c		:
-		find *.c */*.c | grep -v *vectors*| tr '\n' ' ' 
+		find *.c */*.c | grep -v *vectors* | grep -v *minilibx_macos* | tr '\n' ' ' 
 
 clean	:
 		rm -f ${OBJS}

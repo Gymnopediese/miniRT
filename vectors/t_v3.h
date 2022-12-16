@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_v3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 11:04:12 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:29:52 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define T_V3_H
 
 # include <math.h>
+# include <stdio.h>
 
 typedef struct s_v3
 {
@@ -94,4 +95,25 @@ double		v_max(const t_v3 *v);
 double		v_min(const t_v3 *v);
 //retourne le plus grand element du vecteur absolue
 double		v_maxabs(const t_v3 *v);
+
+//imprime name suivie d'une copie de a (utilise printf!!!!)
+void		v_nrprint(t_v3 a, const char *name);
+//imprime name suivie de a (utilise printf!!!!)
+void		v_nprint(const t_v3 *a, const char *name);
+//imprime une copie de a (utilise printf!!!!)
+void		v_rprint(t_v3 a);
+//imprime a (utilise printf!!!!)
+void		v_print(const t_v3 *a);
+
+//imprime name suivie d'une copie de a puis d'un retour a la ligne
+void		v_nrprintn(t_v3 a, const char *name);
+//imprime name suivie de a puis d'un retour a la ligne
+void		v_nprintn(const t_v3 *a, const char *name);
+//imprime une copie de a puis d'un retour a la ligne
+void		v_rprintn(t_v3 a);
+//imprime a puis d'un retour a la ligne
+void		v_printn(const t_v3 *a);
+
+
+
 #endif

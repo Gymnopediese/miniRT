@@ -6,11 +6,11 @@
 #    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/17 18:46:11 by albaud            #+#    #+#              #
-#    Updated: 2022/12/12 09:49:34 by albaud           ###   ########.fr        #
+#    Updated: 2022/12/16 08:56:35 by albaud           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS 	= v_add.c v_angle.c v_average.c v_dist.c v_div.c v_dotp.c v_equal.c v_minmax.c v_mult.c v_norme.c v_null.c v_ponline.c v_rm.c v_tocol.c v_unit.c v_v3mult.c
+SRCS 	= v_add.c v_angle.c v_average.c v_dist.c v_div.c v_dotp.c v_equal.c v_minmax.c v_mult.c v_norme.c v_null.c v_ponline.c v_print.c v_printn.c v_rm.c v_shortd.c v_tocol.c v_unit.c v_v3mult.c
 OBJS 	= ${SRCS:.c=.o}
 NAME 	= vlib.a
 CC		= gcc

@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/10 21:46:08 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/16 10:20:39 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@
 void		init_camera(char **argv, t_scene *scene);
 void		init_light(char **argv, t_scene *scene);
 void		init_ambiance(char **argv, t_scene *scene);
-void		init_sphere(char **argv, t_obj *cam);
-void		init_plan(char **argv, t_obj *cam);
-void		init_cylindre(char **argv, t_obj *cam);
-void		init_cone(char **argv, t_obj *cam);
-void		init_hyperboloid(char **argv, t_obj *cam);
+void		init_sphere(char **argv, t_obj *obj);
+void		init_plan(char **argv, t_obj *obj);
+void		init_cylindre(char **argv, t_obj *obj);
+void		init_cone(char **argv, t_obj *obj);
+void		init_hyperboloid(char **argv, t_obj *obj);
+void		init_hyperboloid2(char **argv, t_obj *obj);
+void		init_paraboloid(char **argv, t_obj *obj);
+void		init_paraboloid2(char **argv, t_obj *obj);
 
 void		valid_file(char *filename);
 t_v3		ft_atovedo(char *str, double min, double max);
