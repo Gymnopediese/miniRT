@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 15:04:19 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/15 12:17:53 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ double	hit_circle(const t_ray *ray, const t_obj *c)
 		return (1 / (lon / c->diametre));
 	return (0);
 }
-#include <stdio.h>
-t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine)
+t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine) //Peut-être buggué
 {
 	double	bc;
 	t_v3	ba;
+	t_v3	ac;
 	t_v3	c;
 	t_v3	res;
 
@@ -69,8 +69,8 @@ t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine)
 	bc = cos(v_angle(&ba, &hit->normal)) * v_dist(&hit->ray.origin, origine);
 	c = v_unit(&hit->normal);
 	c = v_ponline(&hit->ray.origin, &c, bc);
-	res = v_rm(&c, origine);
-	v_cnmult(&res, 2);
+	ac = v_rm(&c, origine);
+	v_cadd(&res, &c);
 	hit->ray.direction = v_rm(&res, &hit->ray.origin);
 	return (hit);
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   inputs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:58:30 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/12 11:01:52 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/14 15:55:43 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-#define ADD -0.1
+#define ADD 0.1
 
 void	input_camera(int key, t_scene *scene)
 {

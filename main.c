@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/13 15:05:48 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:37:16 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene)
 
 int	hook(int key, t_scene *scene)
 {
-	int	**buffer;
+	t_v3	**buffer;
 
 	buffer = malloc(scene->w.cvs.y * sizeof(*buffer)); // Pour les tests
 	for (int i = 0; i < scene->w.cvs.y; ++i)
@@ -74,7 +74,7 @@ int	hook(int key, t_scene *scene)
 		&(t_v3){228, 119, 119});
 	// iterate_objects(scene);
 	// test :
-	progressive_iteration(scene, buffer, 3);
+	progressive_iteration(scene, buffer, STEPS);
 	print_buffer(scene, buffer);
 	ft_putimg(scene->w, scene->w.cvs.img, (t_vector){0, 0, 0, 0});
 	return (0);
@@ -95,6 +95,7 @@ int	hook(int key, t_scene *scene)
 int	main(int argc, char **argv)
 {
 	t_scene		scene;
+	t_v3		**buffer;
 
 	if (argc != 2)
 	{
@@ -108,7 +109,13 @@ int	main(int argc, char **argv)
 	gradient_background(&scene.w.cvs, &(t_v3){100, 228, 228},
 		&(t_v3){228, 119, 119});
 	//scene.texture = ft_init_image(scene.w.mlx, "textures/world.xpm");
-	iterate_objects(&scene);
+	buffer = malloc(scene.w.cvs.y * sizeof(*buffer)); // Pour les tests
+	for (int i = 0; i < scene.w.cvs.y; ++i)
+	{
+		buffer[i] = malloc(scene.w.cvs.x * sizeof(**buffer)); // Pour les tests
+	}
+	progressive_iteration(&scene, buffer, STEPS);
+	print_buffer(&scene, buffer);
 	ft_putimg(scene.w, scene.w.cvs.img, (t_vector){0, 0, 0, 0});
 	print_scene(&scene);
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);

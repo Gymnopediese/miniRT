@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:06:36 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 16:35:46 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:43:05 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_sphere(char **argv, t_obj *obj)
 	if (obj->diametre < 0)
 		error("Wrong diameter for a sphere");
 	obj->color = ft_atovei(argv[3], 0, 255);
+	v_cndiv(&obj->color, 255.0);
 }
 
 void	init_plan(char **argv, t_obj *obj)
@@ -32,6 +33,7 @@ void	init_plan(char **argv, t_obj *obj)
 	obj->pos = ft_atovedo(argv[1], 0, 0);
 	obj->orientation = ft_atovedo(argv[2], -1, 1);
 	obj->color = ft_atovei(argv[3], 0, 255);
+	v_cndiv(&obj->color, 255.0);
 }
 
 void	init_cylindre(char **argv, t_obj *obj)
@@ -48,6 +50,7 @@ void	init_cylindre(char **argv, t_obj *obj)
 	if (obj->hauteur < 0)
 		error("Wrong hight for a cylindre");
 	obj->color = ft_atovei(argv[5], 0, 255);
+	v_cndiv(&obj->color, 255.0);
 }
 
 void	init_cone(char **argv, t_obj *obj)

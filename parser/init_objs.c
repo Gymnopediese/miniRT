@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_objs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:06:36 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/09 16:34:02 by albaud           ###   ########.fr       */
+/*   Updated: 2022/12/13 15:41:22 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_light(char **argv, t_scene *scene)
 	scene->light->pos = ft_atovedo(argv[1], 0, 0);
 	scene->light->ratio = ft_atodor(argv[2], 0, 1);
 	scene->light->color = ft_atovei(argv[3], 0, 255);
+	v_cnmult(&scene->light->color, scene->light->ratio / 255.0);
 }
 
 void	init_ambiance(char **argv, t_scene *scene)
@@ -45,4 +46,5 @@ void	init_ambiance(char **argv, t_scene *scene)
 		error("Wrong arguments number for the ambiance");
 	scene->ambiance->ratio = ft_atodor(argv[1], 0, 1);
 	scene->ambiance->color = ft_atovei(argv[2], 0, 255);
+	v_cnmult(&scene->ambiance->color, scene->ambiance->ratio / 255.0);
 }
