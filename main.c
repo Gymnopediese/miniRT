@@ -6,14 +6,14 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:43:32 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:58:31 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:49:27 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include "parser/parser.h"
 
-void	 apply_matrices(t_list *o, t_scene *scene)
+void	apply_matrices(t_list *o, t_scene *scene)
 {
 	while (o)
 	{
@@ -127,7 +127,6 @@ int	main(int argc, char **argv)
 {
 	t_scene		scene;
 	t_gui		gui;
-	int 		pid;
 
 	if (argc != 2)
 	{
@@ -143,11 +142,6 @@ int	main(int argc, char **argv)
 	mlx_hook(scene.w.win, 5, 0, mousetest, &scene);
 	mlx_hook(scene.w.win, 2, 0, hook, &scene);
 	mlx_loop(scene.w.mlx);
-	// pid = fork();
-	// if (pid == 0)
-	// 	mlx_loop(gui.w.mlx);
-	// else
-	// 	mlx_loop(scene.w.mlx);
 }
 
 // t_hit	hit;

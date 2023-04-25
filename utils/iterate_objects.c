@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 12:03:14 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:16:18 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	progressive_iteration(t_scene *scene, t_v3 **buffer, int steps)
 				l_color = (t_v3){0.0, 0.0, 0.0};
 				ray_trace(scene, &r, &l_color, &s_color, 0);
 				buffer[y][x] = l_color;
-				if (l_color.x > 0.0)
+				if (l_color.x + l_color.y + l_color.z != 0) // Point d'accroche pour les tests. A enlever
 					continue ;
 			}
 		}
@@ -155,7 +155,6 @@ void	print_buffer(t_scene *scene, t_v3 **buffer)
 				tmp_x = skip_x;
 				while (tmp_x > 0)
 				{
-					
 					ft_put_pixel(&scene->w.cvs, x - tmp_x, y - tmp_y, color);
 					tmp_x -= 1;
 				}

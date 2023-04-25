@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 12:02:55 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:51:02 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,30 @@ void	new_dir(t_ray *r, t_ray *new, t_obj *obj)
 	new->direction = v_units(&new->direction);
 }
 
+static double	min_pos_dist(double a, double b)
+{
+	if (a >= __FLT_EPSILON__ && b >= __FLT_EPSILON__) // Si les 2 sont positif et grands
+	{
+		if (a > b)
+			return (b);
+		else
+			return (a);
+	}
+	if (fabs(a) > __FLT_EPSILON__ && fabs(b) > __FLT_EPSILON__) // Si les deux sont grands
+	{
+		if (a > 0)
+			return (a);
+		if (b > 0)
+			return (b);
+	}
+	if (a > -__FLT_EPSILON__ && b > __FLT_EPSILON__) // Si un collision est tres proche de l'objet (self collide)
+		return (a);
+	else if (b > -__FLT_EPSILON__ && a > __FLT_EPSILON__)
+		return (b);
+	else
+		return (-1);
+}
+
 t_v3	*sphere_intersect(t_ray *r, t_obj *sphere, t_v3 *hit)
 {
 	double		n[5];
@@ -60,19 +84,10 @@ t_v3	*sphere_intersect(t_ray *r, t_obj *sphere, t_v3 *hit)
 	n[3] = (-n[1] + sqrt(discriminant)) / (2.0 * n[0]);
 	n[4] = (-n[1] - sqrt(discriminant)) / (2.0 * n[0]);
 	//printf("%f %f\n", n[3], n[4]);
-	if (n[3] <= n[4])
+	double tmp = min_pos_dist(n[3], n[4]);
+	if (tmp >= -__FLT_EPSILON__)
 	{
-		if (n[3] >= 0 - __FLT_EPSILON__)
-		{
-			*hit = v_ponline(&ray.origin, &ray.direction, n[3]);
-			*hit = m_3mult(hit, sphere->transform);
-			return (hit);
-		}
-		return (0);
-	}
-	if (n[4] >= 0 - __FLT_EPSILON__)
-	{		
-		*hit = v_ponline(&ray.origin, &ray.direction, n[4]);
+		*hit = v_ponline(&ray.origin, &ray.direction, tmp);
 		*hit = m_3mult(hit, sphere->transform);
 		return (hit);
 	}
@@ -145,9 +160,9 @@ t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine) //Peut-être buggué
 // t_v3	sphere_reflection(t_ray *ray, t_obj *sphere, t_v3 *hit)
 // {
 // 	t_v3	c_to_h;
-// 	float	dot_product;
+// 	double	dot_product;
 // 	t_v3	res;
-// 	float	projection;
+// 	double	projection;
 
 // 	c_to_h = v_rm(hit, &sphere->pos);
 // 	dot_product = v_dotp(&ray->direction, &c_to_h);

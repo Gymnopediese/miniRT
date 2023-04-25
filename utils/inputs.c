@@ -6,12 +6,12 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:58:30 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 12:03:04 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:09:53 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-#define ADD 0.1
+#define ADD 1.1
 
 void	input_camera(int key, t_scene *scene)
 {
