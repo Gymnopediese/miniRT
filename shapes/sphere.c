@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2023/05/09 13:56:11 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:04:21 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,19 @@ t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine) //Peut-être buggué
 	hit->ray.direction = v_rm(&res, &hit->ray.origin);
 	return (hit);
 }
+
+// Prends un rayon partant du point d'impact et la normal du point d'impact et retourne la reflexion du rayon
+// t_v3	reflexion(const t_v3 *ray, const t_v3 *normal) // TODO : A faire 
+// {
+// 	ba = v_rm(origine, &hit->ray.origin);
+// 	bc = cos(v_angle(&ba, &hit->normal)) * v_dist(&hit->ray.origin, origine);
+// 	c = v_unit(&hit->normal);
+// 	c = v_ponline(&hit->ray.origin, &c, bc);
+// 	ac = v_rm(&c, origine);
+// 	v_cadd(&res, &c);
+// 	hit->ray.direction = v_rm(&res, &hit->ray.origin);
+// 	return (hit);
+// }
 
 // t_v3	sphere_reflection(t_ray *ray, t_obj *sphere, t_v3 *hit)
 // {

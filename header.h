@@ -6,13 +6,13 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2023/05/08 11:24:43 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:05:06 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 # define HEADER_H
-# define STEPS 4
+# define STEPS 3
 
 # include "koflibc/sources.h"
 # include "structs.h"
