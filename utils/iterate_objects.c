@@ -3,52 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   iterate_objects.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 12:03:14 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/03/17 21:37:33 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-// void	iterate_objects(t_scene *scene)
-// {
-// 	int		x;
-// 	int		y;
-// 	t_ray	r;
-// 	//t_list	*t;
-// 	int		color;
+void	iterate_objects(t_scene *scene)
+{
+	int		x;
+	int		y;
+	t_ray	r;
+	int		color;
 
-// 	y = -1;
-// 	r.origin = scene->camera->pos;
-// 	while (++y < scene->w.cvs.y)
-// 	{
-// 		x = -1;
-// 		while (++x < scene->w.cvs.x)
-// 		{
-// 			r.origin = scene->camera->pos;
-// 			r.direction = v_relative_pos(scene->w.cvs.x, scene->w.cvs.y, x, y);
-// 			color = ray_trace(scene, &r, 0);
-// 			if (-1 != color)
-// 			 	ft_put_pixel(&scene->w.cvs, x, y, color);
-// 			// t = scene->objects;
-// 			// while (t)
-// 			// {
-// 			// 	color = ray_trace(scene, t->data, &r);
-// 			// 	if (-1 != color)
-// 			// 		ft_put_pixel(&scene->w.cvs, x, y, color);
-// 			// 	t = t->next;
-// 			// }
-// 		}
-// 	}
-// }
+	y = -1;
+	r.origin = scene->camera->pos;
+	while (++y < scene->w.cvs.y)
+	{
+		x = -1;
+		while (++x < scene->w.cvs.x)
+		{
+			r.origin = scene->camera->pos;
+			r.direction = v_relative_pos(scene->w.cvs.x, scene->w.cvs.y, x, y);
+			color = ray_trace_basic(scene, &r);
+			if (-1 != color)
+				ft_put_pixel(&scene->w.cvs, x, y, color);
+		}
+	}
+}
 
 void	progressive_iteration(t_scene *scene, t_v3 **buffer, int steps)
 {
 	int		x;
 	int		y;
-	int		line_size;
 	t_ray	r;
 	t_v3	s_color;
 	t_v3	l_color;
@@ -85,7 +75,8 @@ double	find_big_value(t_v3 **buffer, int width, int height)
 	int		x;
 	int		y;
 	double	max_value;
-
+	
+	(void) width;
 	y = -1;
 	max_value = 0.1; // Pour eviter de diviser par 0 ou de trop augmenter la luminosité
 	while (++y < height)
@@ -155,7 +146,6 @@ void	print_buffer(t_scene *scene, t_v3 **buffer)
 				tmp_x = skip_x;
 				while (tmp_x > 0)
 				{
-					
 					ft_put_pixel(&scene->w.cvs, x - tmp_x, y - tmp_y, color);
 					tmp_x -= 1;
 				}

@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:50:34 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 10:02:42 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/19 01:50:04 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define B 1
 #define C 1
 
-t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
+int	hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_hit *hit)
 {
 	double	a;
 	double	b;
@@ -24,17 +24,10 @@ t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 	double	x;
 	t_ray	r;
 
-	double	xm;
-	double	ym;
-	double	zm;
-
-	xm = B * B * C * C;
-	ym = A * A * C * C;
-	zm = B * B * A * A;
-	new_dir(ray, &r, cylindre);
-	a = r.direction.x * r.direction.x * xm + r.direction.y * r.direction.y * ym - r.direction.z * r.direction.z * zm;
-	b = 2 * (r.direction.x * r.origin.x * xm + r.direction.y * r.origin.y * ym - r.direction.z * r.origin.z * zm);
-	c = r.origin.x * r.origin.x * xm + r.origin.y * r.origin.y * ym - r.origin.z * r.origin.z * zm - 1;
+	global_to_local(ray, &r, cylindre);
+	a = r.direction.x * r.direction.x + r.direction.y * r.direction.y - r.direction.z * r.direction.z;
+	b = 2 * (r.direction.x * r.origin.x + r.direction.y * r.origin.y - r.direction.z * r.origin.z);
+	c = r.origin.x * r.origin.x + r.origin.y * r.origin.y - r.origin.z * r.origin.z - 1;
 	x = b * b - 4 * a * c;
 	if (x <= 0)
 		return (0);
@@ -46,12 +39,13 @@ t_v3	*hyperboloid_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 		r.origin = v_ponline(&r.origin, &r.direction, x);
 	if (c <= 0 || x <= 0 || fabs(r.origin.z) > 2)
 		return (0);
+	hit->normal = (t_v3){r.origin.x, r.origin.y, 0};
+	hit->normal = m_3mult(&hit->normal, cylindre->transform);
 	r.origin = m_3mult(&r.origin, cylindre->transform);
-	hit->x = r.origin.x;
-	hit->y = r.origin.y;
-	hit->z = r.origin.z;
+	hit->ray.origin = r.origin;
+	hit->obj = cylindre;
 
-	return (hit);
+	return (1);
 }
 
 // t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine)

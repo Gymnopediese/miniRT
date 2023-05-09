@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:50:34 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 10:27:39 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/18 00:14:37 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_v3	*hyperboloid2_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
 	xm = B * B * C * C;
 	ym = A * A * C * C;
 	zm = B * B * A * A;
-	new_dir(ray, &r, cylindre);
+	global_to_local(ray, &r, cylindre);
 	a = r.direction.x * r.direction.x * xm + r.direction.y * r.direction.y * ym - r.direction.z * r.direction.z * zm;
 	b = 2 * (r.direction.x * r.origin.x * xm + r.direction.y * r.origin.y * ym - r.direction.z * r.origin.z * zm);
 	c = r.origin.x * r.origin.x * xm + r.origin.y * r.origin.y * ym - r.origin.z * r.origin.z * zm + 1;

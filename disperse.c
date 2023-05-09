@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   disperse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:29:26 by bphilago          #+#    #+#             */
-/*   Updated: 2022/12/16 11:51:41 by bphilago         ###   ########.fr       */
+/*   Updated: 2022/12/16 16:34:22 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_v3	std_normal(t_v3 *vec)
 	return ((t_v3){0.0, 0.0, 0.0});
 }
 
-double	range(double num, double min, double max)
+double	srange(double num, double min, double max)
 {
 	if (num > max)
 		return (max);
@@ -62,8 +62,8 @@ t_v3	disperse(t_hit *hit, t_obj *obj)
 	j = v_v3mult(&i, &hit->ray.direction);
 	i = v_unit(&i);
 	j = v_unit(&j);
-	r = sqrt(range(-0.1 + rand01(), 0, 1));
-	theta = range(0 + rand01(), 0, 1) * 2 * PI;
+	r = sqrt(srange(-0.1 + rand01(), 0, 1));
+	theta = srange(0 + rand01(), 0, 1) * 2 * PI;
 	i = v_nmult(&i, r * cos(theta));
 	j = v_nmult(&j, r * sin(theta));
 	target = v_unit(&hit->ray.direction);

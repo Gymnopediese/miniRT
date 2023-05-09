@@ -1,5 +1,21 @@
 {
 	"files.associations": {
-		"complex": "c"
+		"complex": "c",
+		"background.h": "c",
+		"shapes.h": "c",
+		"__node_handle": "c",
+		"header.h": "c",
+		"typeinfo": "c",
+		"t_v3.h": "c",
+		"algorithm": "c",
+		"structs.h": "c",
+		"parser.h": "c",
+		"gui.h": "c",
+		"pthread.h": "c",
+		"sources.h": "c",
+		"signal.h": "c",
+		"math.h": "c",
+		"struct.h": "c",
+		"clean_inputs": "c"
 	}
 }

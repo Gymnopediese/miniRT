@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:32:47 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/19 01:28:30 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "vectors/t_v3.h"
+# include "vector3d/t_v3.h"
 # include "koflibc/struct.h"
+# include <pthread.h>
+
+typedef struct s_eqt
+{
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+	double	x1;
+	double	x2;
+}	t_eqt;
 
 enum e_id
 {
@@ -66,6 +77,7 @@ typedef struct s_obj
 	double		diametre;
 	double		hauteur;
 	t_v3		color;
+	t_v3		scale;
 	char		moved;
 	double		albedo;
 	double		dispertion;
@@ -81,6 +93,16 @@ typedef struct s_hit
 	t_obj	*obj;
 }	t_hit;
 
+typedef struct s_scene	t_scene;
+
+typedef struct s_process
+{
+	pthread_t	thread;
+	t_v3		start;
+	int			iteration;
+	t_scene		*scene;
+}	t_process;
+
 typedef struct s_scene
 {
 	t_window		w;
@@ -89,8 +111,16 @@ typedef struct s_scene
 	t_light			*light;
 	t_list			*objects;
 	int				input_mode;
-	t_v3			*(*intersections[8])();
+	int				(*intersections[8])();
 	int				(*hook)();
+
+	char			inputs[128];
+	//create a struc for those
+	t_process		*processes;
+	int				process_count;
+	int				process_amount;
+	pthread_mutex_t	lock;
 }	t_scene;
+
 
 #endif

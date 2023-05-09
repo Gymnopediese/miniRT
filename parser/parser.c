@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:21:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:59:33 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/03/19 01:51:34 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	ligne_to_shape(char **argv, t_scene *scene, enum e_id id)
 		init_paraboloid(argv, obj);
 	else if (id == PARABOLOID2)
 		init_paraboloid2(argv, obj);
+	obj->scale = (t_v3){1, 1, 1};
 	ft_lstadd_back(&scene->objects, ft_lstnew(obj));
 }
 

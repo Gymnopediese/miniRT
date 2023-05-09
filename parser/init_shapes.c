@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 14:06:36 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:58:56 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/03/19 01:51:48 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	init_cone(char **argv, t_obj *obj)
 	if (obj->hauteur < 0)
 		error("Wrong hight for a cone");
 	obj->color = ft_atovei(argv[5], 0, 255);
+	v_cndiv(&obj->color, 255.0);
 }
 
 void	init_hyperboloid(char **argv, t_obj *obj)
@@ -83,4 +84,5 @@ void	init_hyperboloid(char **argv, t_obj *obj)
 	if (obj->hauteur < 0)
 		error("Wrong hight for a hyperboloid");
 	obj->color = ft_atovei(argv[5], 0, 255);
+	v_cndiv(&obj->color, 255.0);
 }

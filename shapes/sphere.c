@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 12:02:55 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:48:13 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,57 +24,54 @@ t_v3	v_units(const t_v3 *a)
 	});
 }
 
-void	new_dir(t_ray *r, t_ray *new, t_obj *obj)
+void	local_to_global(t_v3 *r, t_obj *obj)
 {
-	// r->direction.x *= -1;
-	// r->direction.y *= -1;
-	// r->direction.z *= -1;
-	new->origin = m_3mult(&r->origin, obj->inverse_transform);
-	new->direction = m_3mults(&r->direction, obj->inverse_transform);
-	// r->direction.x *= -1;
-	// r->direction.y *= -1;
-	// r->direction.z *= -1;
-	new->direction = v_units(&new->direction);
+	*r = m_3mult(r, obj->transform);
 }
 
-t_v3	*sphere_intersect(t_ray *r, t_obj *sphere, t_v3 *hit)
+void	global_to_local(t_ray *r, t_ray *new, t_obj *obj)
+{
+	new->origin = m_3mult(&r->origin, obj->inverse_transform);
+	new->direction = m_3mults(&r->direction, obj->inverse_transform);
+	new->direction = v_unit(&new->direction);
+}
+
+int	sphere_intersect(t_ray *r, t_obj *sphere, t_hit *hit)
 {
 	double		n[5];
 	double		discriminant;
 	t_ray		ray;
 	t_v3		oc;
 
-	new_dir(r, &ray, sphere);
-	oc = v_rm(&ray.origin,&(t_v3){0, 0, 0});
+	global_to_local(r, &ray, sphere);
+	oc = ray.origin;
 	n[0] = v_dotp(&ray.direction, &ray.direction);
 	n[1] = 2 * v_dotp(&oc, &ray.direction);
 	n[2] = v_dotp(&oc, &oc) - pow(sphere->diametre / 2, 2);
 	discriminant = n[1] * n[1] - 4 * n[0] * n[2];
 	if (discriminant < 0)
 		return (0);
-	// print_vector(r->origin, "global origine");
-	// print_vector(r->direction, "global direction");
-	// print_vector(ray.origin, "local origine");
-	// print_vector(ray.direction, "local direction");
-	// print_vector(oc, "oc tagueulr");
 	n[3] = (-n[1] + sqrt(discriminant)) / (2.0 * n[0]);
 	n[4] = (-n[1] - sqrt(discriminant)) / (2.0 * n[0]);
-	//printf("%f %f\n", n[3], n[4]);
+	hit->obj = sphere;
 	if (n[3] <= n[4])
 	{
 		if (n[3] >= 0 - __FLT_EPSILON__)
 		{
-			*hit = v_ponline(&ray.origin, &ray.direction, n[3]);
-			*hit = m_3mult(hit, sphere->transform);
-			return (hit);
+			hit->ray.origin = v_ponline(&ray.origin, &ray.direction, n[3]);
+			hit->ray.origin = m_3mult(&hit->ray.origin, sphere->transform);
+			hit->normal = v_rm(&hit->ray.origin, &sphere->pos);
+			return (1);
 		}
 		return (0);
 	}
 	if (n[4] >= 0 - __FLT_EPSILON__)
 	{		
-		*hit = v_ponline(&ray.origin, &ray.direction, n[4]);
-		*hit = m_3mult(hit, sphere->transform);
-		return (hit);
+		hit->ray.origin = v_ponline(&ray.origin, &ray.direction, n[4]);
+		hit->ray.origin = m_3mult(&hit->ray.origin, sphere->transform);
+		hit->normal = v_rm(&hit->ray.origin, &sphere->pos);
+		hit->normal = m_3mult(&hit->normal, sphere->transform);
+		return (1);
 	}
 	return (0);
 }

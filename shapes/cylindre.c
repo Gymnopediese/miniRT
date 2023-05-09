@@ -6,78 +6,82 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:50:34 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 10:34:13 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/19 01:38:26 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../header.h"
 
-t_vector	v_4unit(const t_vector *a)
-{
-	double	norm;
+// t_vector	v_4unit(const t_vector *a)
+// {
+// 	double	norm;
 
-	norm = sqrt(a->x * a->x + a->y * a->y + a->z * a->z + a->w * a->w);
-	return ((t_vector){
-		a->x / norm,
-		a->y / norm,
-		a->z / norm,
-		a->w / norm,
-	});
+// 	norm = sqrt(a->x * a->x + a->y * a->y + a->z * a->z + a->w * a->w);
+// 	return ((t_vector){
+// 		a->x / norm,
+// 		a->y / norm,
+// 		a->z / norm,
+// 		a->w / norm,
+// 	});
+// }
+
+// void	v_4print(const t_vector *a, char *name)
+// {
+// 	printf("%s (%f %f %f %f)\n", name, a->x, a->y, a->z, a->w);
+// }
+
+// t_vector	m_44mult(const t_vector *p, double m[4][4])
+// {
+// 	t_vector	r;
+
+// 	// r.x = p->x * m[0][0] + p->y * m[1][0] + p->z * m[2][0] + m[3][0];
+// 	// r.y = p->x * m[0][1] + p->y * m[1][1] + p->z * m[2][1] + m[3][1];
+// 	// r.z = p->x * m[0][2] + p->y * m[1][2] + p->z * m[2][2] + m[3][2];
+// 	// r.w = p->x * m[0][3] + p->y * m[1][3] + p->z * m[2][3] + m[3][3];
+// 	r.x = p->x * m[0][0] + p->y * m[0][1] + p->z * m[0][2] + p->w * m[0][3];
+// 	r.y = p->x * m[1][0] + p->y * m[1][1] + p->z * m[1][2] + p->w * m[1][3];
+// 	r.z = p->x * m[2][0] + p->y * m[2][1] + p->z * m[2][2] + p->w * m[2][3];
+// 	r.w = p->x * m[3][0] + p->y * m[3][1] + p->z * m[3][2] + p->w * m[3][3];
+// 	return (r);
+// }
+
+void	cylindre_equation(t_eqt *e, t_ray *ray, t_obj *obj)
+{
+	e->a = ray->direction.x * ray->direction.x
+		+ ray->direction.y * ray->direction.y;
+	e->b = 2 * (ray->direction.x * ray->origin.x
+			+ ray->direction.y * ray->origin.y);
+	e->c = ray->origin.x * ray->origin.x + ray->origin.y * ray->origin.y
+		- obj->diametre / 2 * obj->diametre / 2;
+	e->delta = e->b * e->b - 4 * e->a * e->c;
+	if (e->delta < 0)
+		return ;
+	e->x1 = (-e->b + sqrt(e->delta)) / (2 * e->a);
+	e->x2 = (-e->b - sqrt(e->delta)) / (2 * e->a);
 }
 
-void	v_4print(const t_vector *a, char *name)
+int	cylindre_intersect(t_ray *ray, t_obj *cylindre, t_hit *hit)
 {
-	printf("%s (%f %f %f %f)\n", name, a->x, a->y, a->z, a->w);
-}
-
-t_vector	m_44mult(const t_vector *p, double m[4][4])
-{
-	t_vector	r;
-
-	// r.x = p->x * m[0][0] + p->y * m[1][0] + p->z * m[2][0] + m[3][0];
-	// r.y = p->x * m[0][1] + p->y * m[1][1] + p->z * m[2][1] + m[3][1];
-	// r.z = p->x * m[0][2] + p->y * m[1][2] + p->z * m[2][2] + m[3][2];
-	// r.w = p->x * m[0][3] + p->y * m[1][3] + p->z * m[2][3] + m[3][3];
-	r.x = p->x * m[0][0] + p->y * m[0][1] + p->z * m[0][2] + p->w * m[0][3];
-	r.y = p->x * m[1][0] + p->y * m[1][1] + p->z * m[1][2] + p->w * m[1][3];
-	r.z = p->x * m[2][0] + p->y * m[2][1] + p->z * m[2][2] + p->w * m[2][3];
-	r.w = p->x * m[3][0] + p->y * m[3][1] + p->z * m[3][2] + p->w * m[3][3];
-	return (r);
-}
-
-t_v3	*cylindre_intersect(t_ray *ray, t_obj *cylindre, t_v3 *hit)
-{
-	double	a;
-	double	b;
-	double	c;
-	double	x;
+	t_eqt	e;
 	t_ray	r;
 
-	new_dir(ray, &r, cylindre);
-	a = r.direction.x * r.direction.x + r.direction.y * r.direction.y;
-	b = 2 * (r.direction.x * r.origin.x + r.direction.y * r.origin.y);
-	c = r.origin.x * r.origin.x + r.origin.y * r.origin.y
-		- cylindre->diametre / 2 * cylindre->diametre / 2;
-	x = b * b - 4 * a * c;
-	if (x <= 0)
+	global_to_local(ray, &r, cylindre);
+	cylindre_equation(&e, &r, cylindre);
+	if (e.delta < 0)
 		return (0);
-	c = (-b + sqrt(x)) / (2 * a);
-	x = (-b - sqrt(x)) / (2 * a);
-	if (c < 0 || x < 0)
-		return (0);
-	if (c < x)
-		r.origin = v_ponline(&r.origin, &r.direction, c);
+	if (e.x2 < e.x1)
+		r.origin = v_ponline(&r.origin, &r.direction, e.x2);
 	else
-		r.origin = v_ponline(&r.origin, &r.direction, x);
+		r.origin = v_ponline(&r.origin, &r.direction, e.x1);
 	if (fabs(r.origin.z) > cylindre->hauteur)
 		return (0);
+	hit->normal = (t_v3){r.origin.x, r.origin.y, 0};
+	hit->normal = m_3mult(&hit->normal, cylindre->transform);
 	r.origin = m_3mult(&r.origin, cylindre->transform);
-	hit->x = r.origin.x;
-	hit->y = r.origin.y;
-	hit->z = r.origin.z;
-
-	return (hit);
+	hit->ray.origin = r.origin;
+	hit->obj = cylindre;
+	return (1);
 }
 	// r.origin = m_4mult(r->origin, cylindre->inverse_transform);
 	// di = m_4mult(r->direction, cylindre->inverse_transform);

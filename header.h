@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 11:51:50 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:31:33 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@
 # include "background/background.h"
 # include "shapes/shapes.h"
 # include "gui/gui.h"
+# include <pthread.h>
+# include <signal.h>
 
+int			inputs(t_scene *scene);
+void		*iterate_thread(void *p);
+void		init_threads(t_scene *scene, int amount);
+int			ray_trace_basic(t_scene *scene, t_ray *r);
 void		print_scene(t_scene *i);
 void		parse_rt_file(t_scene *scene, char *file_name);
 void		error(char *message);
@@ -37,4 +43,7 @@ int			coloring2(t_obj	*obj, t_v3 *hit, t_scene *scene);
 // test
 void		print_buffer(t_scene *scene, t_v3 **buffer);
 void		progressive_iteration(t_scene *scene, t_v3 **buffer, int steps);
+
+int			keyup(int key, char *keys);
+int			keydown(int key, char *keys);
 #endif

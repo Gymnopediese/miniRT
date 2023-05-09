@@ -6,13 +6,29 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 12:50:34 by albaud            #+#    #+#             */
-/*   Updated: 2022/12/16 10:02:01 by albaud           ###   ########.fr       */
+/*   Updated: 2023/03/19 01:38:57 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-t_v3	*plan_intersect(t_ray *ray, t_obj *plan, t_v3 *hit)
+int	plan_intersect(t_ray *r, t_obj *plan, t_hit *hit)
+{
+	double	x;
+	t_ray	ray;
+
+	global_to_local(r, &ray, plan);
+	x = (v_norm(&plan->pos) - v_dotp(&plan->orientation, &ray.origin))
+		/ v_dotp(&plan->orientation, &ray.direction);
+	hit->normal = plan->orientation;
+	hit->ray.origin = v_ponline(&ray.origin, &ray.direction, x);
+	//local_to_global(&hit->normal, plan);
+	hit->obj = plan;
+	local_to_global(&hit->ray.origin, plan);
+	return (1);
+}
+
+t_v3	*plan_insdtersect(t_ray *ray, t_obj *plan, t_v3 *hit)
 {
 	double	a;
 	double	b;
