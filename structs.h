@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/19 01:28:30 by albaud           ###   ########.fr       */
-=======
-/*   Updated: 2023/01/15 13:27:32 by bphilago         ###   ########.fr       */
->>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
+/*   Updated: 2023/05/09 16:43:56 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +111,9 @@ typedef struct s_scene
 	t_light			*light;
 	t_list			*objects;
 	int				input_mode;
-	int				(*intersections[8])();
+
+	int				(*is_intersections[8])(t_ray *r, t_obj *obj);
+	int				(*intersections[8])(t_ray *r, t_obj *obj, t_hit *hit);
 	int				(*hook)();
 
 	char			inputs[128];

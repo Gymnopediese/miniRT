@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:08:13 by albaud            #+#    #+#             */
-/*   Updated: 2023/05/09 16:34:10 by albaud           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:54:19 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	progressive_iteration(t_scene *scene, t_v3 **buffer, int steps)
 					(scene->w.cvs.x, scene->w.cvs.y, x, y);
 				s_color = (t_v3){1.0, 1.0, 1.0};
 				l_color = (t_v3){0.0, 0.0, 0.0};
-				ray_trace(scene, &r, &l_color, &s_color, 1.0, 0);
+				ray_trace(scene, &r, &l_color, &s_color, 1.0);
 				buffer[y][x] = l_color;
 				if (l_color.x + l_color.y + l_color.z != 0) // Point d'accroche pour les tests. A enlever
 					continue ;

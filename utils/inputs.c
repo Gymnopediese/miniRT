@@ -6,20 +6,12 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 17:58:30 by albaud            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/17 21:36:55 by albaud           ###   ########.fr       */
-=======
-/*   Updated: 2023/04/24 15:09:53 by bphilago         ###   ########.fr       */
->>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
+/*   Updated: 2023/05/09 16:54:11 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
-<<<<<<< HEAD
 #define ADD 0.5
-=======
-#define ADD 1.1
->>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 
 int	inputs(t_scene *scene)
 {

@@ -6,7 +6,7 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:22:13 by albaud            #+#    #+#             */
-/*   Updated: 2023/05/09 16:31:28 by albaud           ###   ########.fr       */
+/*   Updated: 2023/05/09 16:53:56 by albaud           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,37 @@ void	brightness(t_v3 *tmp_color, const t_v3 *origine_pos, const t_hit *hit, cons
 {
 	t_list	*objects;
 	t_ray	r;
-	t_v3	tmp;
-	t_obj	*obj;
+	//t_v3	tmp;
 
+	(void) origine_pos;
 	objects = scene->objects;
 	r.direction = v_rm(&scene->light->pos, &hit->ray.origin);
 	r.origin = hit->ray.origin;
-	while (objects)
+	if (intersect_any_object(scene, &r))
 	{
-		obj = objects->data;
-		if (sphere_intersect(&r, obj, &tmp))
-		{
-			v_cnmult(tmp_color, 0.0);
-			return ;
-		}
-		objects = objects->next;
+		v_cnmult(tmp_color, 0.0);
+		return ;
 	}
 	v_cmult(tmp_color, &scene->light->color);
 	t_v3 v1 = v_unit(&r.direction);
 	t_v3 v2 = v_unit(&hit->normal);
-	obj->dispertion = PI;
 	v_cnmult(tmp_color, cos(v_angle(&v1, &v2)));
+}
+
+int	intersect_any_object(const t_scene *scene, t_ray *r)
+{
+	t_list	*objects;
+	t_obj	*obj;
+
+	objects = scene->objects;
+	while (objects)
+	{
+		obj = objects->data;
+		if (scene->is_intersections[obj->id - 3](r, obj))
+			return (1);
+		objects = objects->next;
+	}
+	return (0);
 }
 
 int	hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
@@ -48,12 +58,12 @@ int	hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 	t_obj	*cobj;
 	double	t;
 
-	min = 999999;
+	min = MAXFLOAT;
 	objects = scene->objects;
 	while (objects)
 	{
 		obj = objects->data;
-		if (scene->intersections[obj->id - 3](r, obj, hit))
+		if (scene->is_intersections[obj->id - 3](r, obj))
 		{
 			t = v_dist(&r->origin, &hit->ray.origin);
 			if (t < min)
@@ -64,7 +74,7 @@ int	hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 		}
 		objects = objects->next;
 	}
-	if (min == 999999)
+	if (min == MAXFLOAT)
 		return (0);
 	scene->intersections[cobj->id - 3](r, cobj, hit);
 	return (1);
@@ -92,11 +102,13 @@ int	ray_trace_basic(t_scene *scene, t_ray *r) // Enlever Iter
 }
 
 
-void	ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color, int iter) // Enlever Iter
+void	ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color, int iter)
 {
 	t_hit	hit;
 	t_v3	tmp_color;
 	t_obj	*obj_hit;
+
+	(void) iter;
 
 	obj_hit = 0;
 	if (v_norm(s_color) < MIN_SCOLOR)
