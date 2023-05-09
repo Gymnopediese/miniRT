@@ -6,7 +6,11 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/21 12:48:13 by albaud           ###   ########.fr       */
+=======
+/*   Updated: 2023/05/09 13:56:11 by bphilago         ###   ########.fr       */
+>>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +33,7 @@ void	local_to_global(t_v3 *r, t_obj *obj)
 	*r = m_3mult(r, obj->transform);
 }
 
+<<<<<<< HEAD
 void	global_to_local(t_ray *r, t_ray *new, t_obj *obj)
 {
 	new->origin = m_3mult(&r->origin, obj->inverse_transform);
@@ -37,6 +42,33 @@ void	global_to_local(t_ray *r, t_ray *new, t_obj *obj)
 }
 
 int	sphere_intersect(t_ray *r, t_obj *sphere, t_hit *hit)
+=======
+static double	min_pos_dist(double a, double b)
+{
+	if (a >= __FLT_EPSILON__ && b >= __FLT_EPSILON__) // Si les 2 sont positif et grands
+	{
+		if (a > b)
+			return (b);
+		else
+			return (a);
+	}
+	if (fabs(a) > __FLT_EPSILON__ && fabs(b) > __FLT_EPSILON__) // Si les deux sont grands
+	{
+		if (a > 0)
+			return (a);
+		if (b > 0)
+			return (b);
+	}
+	if (a > -__FLT_EPSILON__ && b > __FLT_EPSILON__) // Si un collision est tres proche de l'objet (self collide)
+		return (a);
+	else if (b > -__FLT_EPSILON__ && a > __FLT_EPSILON__)
+		return (b);
+	else
+		return (-1);
+}
+
+t_v3	*sphere_intersect(t_ray *r, t_obj *sphere, t_v3 *hit)
+>>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 {
 	double		n[5];
 	double		discriminant;
@@ -53,6 +85,7 @@ int	sphere_intersect(t_ray *r, t_obj *sphere, t_hit *hit)
 		return (0);
 	n[3] = (-n[1] + sqrt(discriminant)) / (2.0 * n[0]);
 	n[4] = (-n[1] - sqrt(discriminant)) / (2.0 * n[0]);
+<<<<<<< HEAD
 	hit->obj = sphere;
 	if (n[3] <= n[4])
 	{
@@ -72,6 +105,14 @@ int	sphere_intersect(t_ray *r, t_obj *sphere, t_hit *hit)
 		hit->normal = v_rm(&hit->ray.origin, &sphere->pos);
 		hit->normal = m_3mult(&hit->normal, sphere->transform);
 		return (1);
+=======
+	double tmp = min_pos_dist(n[3], n[4]);
+	if (tmp >= -__FLT_EPSILON__)
+	{
+		*hit = v_ponline(&ray.origin, &ray.direction, tmp);
+		*hit = m_3mult(hit, sphere->transform);
+		return (hit);
+>>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 	}
 	return (0);
 }
@@ -142,9 +183,9 @@ t_hit	*sphere_reflection(t_hit *hit, t_v3 *origine) //Peut-être buggué
 // t_v3	sphere_reflection(t_ray *ray, t_obj *sphere, t_v3 *hit)
 // {
 // 	t_v3	c_to_h;
-// 	float	dot_product;
+// 	double	dot_product;
 // 	t_v3	res;
-// 	float	projection;
+// 	double	projection;
 
 // 	c_to_h = v_rm(hit, &sphere->pos);
 // 	dot_product = v_dotp(&ray->direction, &c_to_h);

@@ -6,14 +6,17 @@
 /*   By: albaud <albaud@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/17 18:31:33 by albaud           ###   ########.fr       */
+=======
+/*   Updated: 2023/05/08 11:24:43 by bphilago         ###   ########.fr       */
+>>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef HEADER_H
 # define HEADER_H
-# define STEPS 1
+# define STEPS 4
 
 # include "koflibc/sources.h"
 # include "structs.h"
@@ -33,7 +36,8 @@ void		error(char *message);
 void		input(int key, t_scene *scene);
 // void		iterate_objects(t_scene *scene);
 t_v3		v_relative_pos(double height, double width, double x, double y);
-void		ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color, int iter);
+void		ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color,
+				t_v3 *s_color, float disperssion, int iter);
 void		print_vector(t_v3 a, char *name);
 int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
 int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);

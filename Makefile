@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: albaud <albaud@student.42.fr>              +#+  +:+       +#+         #
+#    By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 14:57:19 by albaud            #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/03/19 01:30:04 by albaud           ###   ########.fr        #
+=======
+#    Updated: 2023/04/24 14:47:06 by bphilago         ###   ########.fr        #
+>>>>>>> 1f52c712e9df5d4d33ce49ab8155b5564be9c2c8
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +36,11 @@ $(NAME)	: ${OBJS}
 
 c		:
 		find *.c */*.c | grep -v *vectors* | grep -v *minilibx_macos* | tr '\n' ' ' 
+
+recompile :
+	make re -C koflibc
+	make re -C minilibx_macos
+	make re
 
 clean	:
 		rm -f ${OBJS}
