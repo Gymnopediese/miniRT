@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:22:13 by albaud            #+#    #+#             */
-/*   Updated: 2023/04/25 12:22:18 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:09:42 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	brightness(t_v3 *tmp_color, const t_v3 *origine_pos, const t_hit *hit, cons
 	t_ray	r;
 	t_v3	tmp;
 	t_obj	*obj;
+	t_hit	tmp_ray;
 
 	objects = scene->objects;
 	r.direction = v_rm(&scene->light->pos, &hit->ray.origin);
@@ -42,6 +43,7 @@ void	brightness(t_v3 *tmp_color, const t_v3 *origine_pos, const t_hit *hit, cons
 		// Penser a adapter la puissance des lumières
 	else
 		v_cnmult(tmp_color, 0.0);
+	
 }
 
 t_obj	*hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
@@ -73,15 +75,15 @@ t_obj	*hit_obj(t_scene *scene, t_ray *r, t_hit *hit)
 	return (colid_obj);
 }
 
-// Gros problem, marche avec une light a 0 !!!!
-void	ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color, int iter) // Enlever Iter
+void	ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color,
+			float disperssion, int iter) // Enlever Iter
 {
 	t_hit	hit;
 	t_v3	tmp_color;
 	int		t;
 	t_obj	*obj_hit;
 
-	if (v_norm(s_color) < MIN_SCOLOR || iter >= 2)
+	if (v_norm(s_color) < MIN_SCOLOR || disperssion < 0.01 || iter > 1)
 		return ;
 	obj_hit = hit_obj(scene, r, &hit);
 	if (obj_hit)
@@ -89,8 +91,13 @@ void	ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color, t_v3 *s_color, int iter)
 		tmp_color = obj_hit->color;
 		brightness(&tmp_color, &r->origin, &hit, scene);
 		v_cmult(&tmp_color, s_color); //Prendre en compte que la brillance renvoie une partie des rayons dans tous les cas !!!
+		//v_cnmult(&tmp_color, disperssion); // Quantite de rayon qui attendra la camera
+		if (iter > 0 && tmp_color.x + tmp_color.y + tmp_color.z >= 0.03)
+			printf("Ricoche !");
+		v_cnmult(&r->direction, -1);
+		// disperssion *= A faire;
 		v_cmult(s_color, &obj_hit->color);
 		v_cadd(l_color, &tmp_color);
-		ray_trace(scene, &hit.ray, l_color, s_color, ++iter);
+		//ray_trace(scene, &hit.ray, l_color, s_color, disperssion, ++iter);
 	}
 }

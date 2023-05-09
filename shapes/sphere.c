@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 19:51:41 by albaud            #+#    #+#             */
-/*   Updated: 2023/04/25 12:51:02 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:56:11 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,8 @@ t_v3	*sphere_intersect(t_ray *r, t_obj *sphere, t_v3 *hit)
 	discriminant = n[1] * n[1] - 4 * n[0] * n[2];
 	if (discriminant < 0)
 		return (0);
-	// print_vector(r->origin, "global origine");
-	// print_vector(r->direction, "global direction");
-	// print_vector(ray.origin, "local origine");
-	// print_vector(ray.direction, "local direction");
-	// print_vector(oc, "oc tagueulr");
 	n[3] = (-n[1] + sqrt(discriminant)) / (2.0 * n[0]);
 	n[4] = (-n[1] - sqrt(discriminant)) / (2.0 * n[0]);
-	//printf("%f %f\n", n[3], n[4]);
 	double tmp = min_pos_dist(n[3], n[4]);
 	if (tmp >= -__FLT_EPSILON__)
 	{

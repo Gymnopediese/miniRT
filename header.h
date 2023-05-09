@@ -6,7 +6,7 @@
 /*   By: bphilago <bphilago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 12:42:18 by albaud            #+#    #+#             */
-/*   Updated: 2023/04/24 15:08:19 by bphilago         ###   ########.fr       */
+/*   Updated: 2023/05/08 11:24:43 by bphilago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		input(int key, t_scene *scene);
 // void		iterate_objects(t_scene *scene);
 t_v3		v_relative_pos(double height, double width, double x, double y);
 void		ray_trace(t_scene *scene, t_ray *r, t_v3 *l_color,
-				t_v3 *s_color, int iter);
+				t_v3 *s_color, float disperssion, int iter);
 void		print_vector(t_v3 a, char *name);
 int			damier(t_obj *obj, t_v3 *hit, t_scene *scene);
 int			uvmapping(t_obj *obj, t_v3 *hit, t_scene *scene);
